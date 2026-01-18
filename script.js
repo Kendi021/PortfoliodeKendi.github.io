@@ -63,178 +63,172 @@ window.onclick = function(event) {
 };
 
 /* =========================================
-   LOGIQUE DU TERMINAL INTERACTIF
+   LOGIQUE DU TERMINAL INTERACTIF (MISE A JOUR)
    ========================================= */
 
-// Système de fichiers virtuel (Le contenu de vos compétences)
+// Système de fichiers virtuel (Contenu riche HTML)
 const fileSystem = {
-    "skills/html.txt": `
-<span class="comment"># Compétences HTML5 & Sémantique</span>
-> Structure : <span class="green">Sémantique stricte (header, main, aside...)</span>
-> Accessibilité : <span class="green">Normes WCAG 2.1 & ARIA</span>
-> SEO : <span class="green">Optimisation des balises méta & hiérarchie</span>
-    `,
-    "skills/css.css": `
-<span class="comment">/* Styles & Design Responsive */</span>
-.competences {
-    display: <span class="blue">flex</span>;
-    architecture: <span class="blue">BEM Methodology</span>;
-    frameworks: [<span class="str">"Tailwind"</span>, <span class="str">"Bootstrap"</span>];
-    animation: <span class="blue">Keyframes & Transitions complexes</span>;
-}
-    `,
-    "skills/javascript.js": `
-<span class="comment">// Dynamisme & Logique Front-end</span>
-const <span class="yellow">kendiSkills</span> = {
-    es6: <span class="blue">true</span>,
-    domManipulation: <span class="str">"Expert"</span>,
-    async: <span class="blue">async</span> () => { <span class="purple">await</span> fetch('API'); },
-    frameworks: [<span class="str">"React"</span>, <span class="str">"Vue.js"</span>]
-};
-    `,
-    "skills/script.py": `
-<span class="comment"># Automation & Back-end</span>
-def <span class="blue">automate_tasks</span>():
-    libs = [<span class="str">"Pandas"</span>, <span class="str">"Requests"</span>, <span class="str">"Selenium"</span>]
-    return <span class="str">"Scripts efficaces & Maintenance"</span>
-    `,
-    "skills/active_directory.config": `
-<span class="comment"># Administration Système Windows</span>
-[User_Management]
-Creation = <span class="green">Automated (PowerShell)</span>
-GPO = <span class="green">Securité & Deploiement</span>
-DHCP_DNS = <span class="green">Configuration Avancée</span>
-    `,
-    "skills/git.log": `
-<span class="red">commit 8f3a1b (HEAD -> main)</span>
-Author: Kendi Cadet
-Date:   Mon Jan 01 2024
+    "ls": `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top:10px;">
+        <span style="color: #ff6d00">html.md</span>
+        <span style="color: #29b6f6">css.style</span>
+        <span style="color: #ffca28">script.js</span>
+        <span style="color: #4fc3f7">main.py</span>
+        <span style="color: #f06292">git.log</span>
+    </div>`,
 
-    feat: Gestion de versions & CI/CD
-    - Maîtrise des branches (merge, rebase)
-    - Collaboration via GitHub/GitLab
-    - Résolution de conflits
+    "cat html.md": `
+    <span class="output-title title-html">HTML5 Expertise</span>
+    <div class="info-grid">
+        <span class="label">Niveau:</span>
+        <span class="value progress-bar">[==================  ] 90%</span>
+        
+        <span class="label">Focus:</span>
+        <span class="value">Accessibilité (a11y), SEO sémantique, DOM</span>
+        
+        <span class="label">Projets:</span>
+        <span class="value">Landing pages, Dashboards structurés</span>
+    </div>`,
+
+    "node script.js": `
+    <span class="output-title title-js">JavaScript (ES6+)</span>
+    <div class="info-grid">
+        <span class="label">Niveau:</span>
+        <span class="value progress-bar">[=================   ] 88%</span>
+        
+        <span class="label">Stack:</span>
+        <span class="value">Vanilla JS, DOM Manipulation, Fetch API</span>
+        
+        <span class="label">Logique:</span>
+        <span class="value">Async/Await, Event Loop, Clean Code</span>
+    </div>`,
+
+    "python main.py": `
+    <span class="output-title title-py">Python Automation</span>
+    <div class="info-grid">
+        <span class="label">Niveau:</span>
+        <span class="value progress-bar">[===============     ] 75%</span>
+        
+        <span class="label">Libs:</span>
+        <span class="value">Pandas, Requests, Selenium, Flask</span>
+        
+        <span class="label">Usage:</span>
+        <span class="value">Scripting, Data processing, Bots</span>
+    </div>`,
+
+    "git log": `
+    <span style="color: #f06292;">commit 8f3a1b (HEAD -> main)</span><br>
+    <span style="color: #808080;">Author:</span> Kendi Cadet<br>
+    <span style="color: #808080;">Date:</span>   Mon Jan 01 2025<br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;feat: Gestion de versions & CI/CD<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- Branches (merge, rebase)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- GitHub Actions Basics
     `
 };
 
-// Variables DOM
 const terminalOutput = document.getElementById("terminal-output");
 const hiddenInput = document.getElementById("hidden-input");
 const visibleInput = document.getElementById("visible-input");
 const terminalScreen = document.querySelector(".terminal-screen");
 
-// Focus sur l'input caché quand on clique sur le terminal
 function focusTerminal() {
     hiddenInput.focus();
 }
 
-// Mise à jour de l'affichage lors de la frappe
-hiddenInput.addEventListener("input", (e) => {
+hiddenInput.addEventListener("input", () => {
     visibleInput.textContent = hiddenInput.value;
 });
 
-// Gestion de la touche Entrée
 hiddenInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        const command = hiddenInput.value.trim();
-        processCommand(command);
-        hiddenInput.value = ""; // Reset input
+        const input = hiddenInput.value.trim();
+        processCommand(input);
+        hiddenInput.value = "";
         visibleInput.textContent = "";
     }
 });
 
-// Traitement des commandes
 function processCommand(cmd) {
-    // 1. Créer la ligne de l'historique (ce que l'utilisateur vient de taper)
+    // 1. Afficher la commande tapée avec le nouveau prompt
     const historyLine = document.createElement("div");
     historyLine.className = "line";
-    historyLine.innerHTML = `<span class="prompt">user@portfolio:~/skills$</span> <span class="cmd">${cmd}</span>`;
+    historyLine.innerHTML = `
+        <span class="prompt-arrow">➜</span> <span class="prompt-path">~</span>
+        <span class="cmd">${cmd}</span>
+    `;
     terminalOutput.appendChild(historyLine);
 
-    // 2. Traiter la commande
-    const args = cmd.split(" ");
-    const command = args[0].toLowerCase();
-    const argument = args[1];
-
+    // 2. Traitement
+    // On nettoie la commande (minuscule + trim)
+    const cleanCmd = cmd.toLowerCase().trim();
     let response = "";
 
-    switch (command) {
-        case "help":
-            response = `Commandes disponibles :
-- <span class="yellow">ls</span> : Lister les fichiers de compétences
-- <span class="yellow">cat [fichier]</span> : Afficher le contenu (ex: cat skills/html.txt)
-- <span class="yellow">clear</span> : Effacer l'écran
-- <span class="yellow">whoami</span> : Qui suis-je ?`;
-            break;
-            
-        case "ls":
-            // Génération de la grille de fichiers avec couleurs
-            response = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
-                <span class="txt-col">html.txt</span>
-                <span class="css-col">css.css</span>
-                <span class="js-col">javascript.js</span>
-                <span class="py-col">script.py</span>
-                <span class="conf-col">active_directory.config</span>
-                <span class="log-col">git.log</span>
-            </div>`;
-            break;
-
-        case "cat":
-            if (!argument) {
-                response = "Usage: cat [nom_du_fichier]";
-            } else {
-                // Recherche tolérante (ex: "cat html" trouve "skills/html.txt")
-                const fileKey = Object.keys(fileSystem).find(key => key.includes(argument));
-                if (fileKey) {
-                    response = fileSystem[fileKey];
-                } else {
-                    response = `Erreur : Le fichier '${argument}' n'existe pas. Tapez 'ls' pour voir la liste.`;
-                }
-            }
-            break;
-
-        case "clear":
-            terminalOutput.innerHTML = "";
-            return; // Pas besoin d'afficher une réponse vide
-            
-        case "whoami":
-            response = "Kendi Cadet - Technicien Support IT & Développeur en devenir.";
-            break;
-
-        case "":
-            break; // Touche entrée vide
-
-        default:
-            response = `Commande '${command}' introuvable. Tapez 'help'.`;
+    // Logique simplifiée pour matcher les clés exactes ou partielles
+    if (cleanCmd === "help") {
+        response = "Commandes: ls, cat [fichier], node [fichier], python [fichier], git log, clear";
+    } else if (cleanCmd === "clear") {
+        terminalOutput.innerHTML = "";
+        return;
+    } else if (fileSystem[cleanCmd]) {
+        // Correspondance exacte (ex: "node script.js")
+        response = fileSystem[cleanCmd];
+    } else {
+        // Recherche approximative (ex: juste "ls" ou juste "python")
+        // Si l'utilisateur tape juste "python", on cherche une clé qui contient python
+        const partialKey = Object.keys(fileSystem).find(key => key.startsWith(cleanCmd));
+        if (partialKey) {
+            response = fileSystem[partialKey];
+        } else {
+            response = `<span style="color:#e06c75">Command not found: ${cmd}</span>`;
+        }
     }
 
-    // 3. Afficher la réponse (si elle existe)
+    // 3. Afficher la réponse
     if (response) {
         const responseLine = document.createElement("div");
-        responseLine.className = "line response";
+        responseLine.className = "line";
         responseLine.innerHTML = response;
         terminalOutput.appendChild(responseLine);
     }
 
-    // 4. Scroll automatique vers le bas
+    // 4. Scroll en bas
     terminalScreen.scrollTop = terminalScreen.scrollHeight;
 }
 
-// Fonction pour exécuter une commande depuis les boutons (Sidebar)
 function runCommand(text) {
-    // Effet visuel : on écrit la commande dans l'input, puis on valide
-    hiddenInput.value = text;
-    visibleInput.textContent = text;
-    hiddenInput.focus();
+    const inputField = document.getElementById("hidden-input");
+    const displayField = document.getElementById("visible-input");
     
-    // Petit délai pour simuler la frappe humaine avant validation
-    setTimeout(() => {
-        const event = new KeyboardEvent('keydown', { key: 'Enter' });
-        hiddenInput.dispatchEvent(event);
-    }, 200);
+    // On vide l'input avant de commencer
+    inputField.value = "";
+    displayField.textContent = "";
+    inputField.focus();
+
+    let i = 0;
+    const speed = 50; // Vitesse de frappe en ms (plus petit = plus vite)
+
+    function typeWriter() {
+        if (i < text.length) {
+            // On ajoute une lettre
+            let char = text.charAt(i);
+            inputField.value += char;
+            displayField.textContent += char;
+            i++;
+            
+            // On continue d'écrire avec un petit délai pour l'effet réaliste
+            setTimeout(typeWriter, speed);
+        } else {
+            // Une fois fini, on valide (Entrée) après une petite pause
+            setTimeout(() => {
+                processCommand(text); // Exécute directement la commande
+                inputField.value = ""; // Nettoie le champ réel
+                displayField.textContent = ""; // Nettoie l'affichage
+            }, 300);
+        }
+    }
+
+    // Lancer l'animation
+    typeWriter();
 }
 
-// Initialisation : Focus au chargement (si sur desktop)
-if (window.innerWidth > 800) {
-    focusTerminal();
-}
+// Init
+if (window.innerWidth > 800) focusTerminal();

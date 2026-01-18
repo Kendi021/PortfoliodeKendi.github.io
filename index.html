@@ -51,53 +51,68 @@
         </aside>
 
         <section class="section-competences" id="competences">
-            <div class="terminal-container">
-                
-                <div class="terminal-sidebar">
-                    <h3><i class="fas fa-terminal"></i> Accès Rapide</h3>
-                    <p class="sidebar-hint">Cliquez pour exécuter :</p>
-                    <ul class="command-list">
-                        <li onclick="runCommand('ls')"><i class="fas fa-list"></i> Lister tout (ls)</li>
-                        <li onclick="runCommand('cat skills/html.txt')"><i class="fab fa-html5"></i> HTML5</li>
-                        <li onclick="runCommand('cat skills/css.css')"><i class="fab fa-css3-alt"></i> CSS3</li>
-                        <li onclick="runCommand('cat skills/javascript.js')"><i class="fab fa-js"></i> JavaScript</li>
-                        <li onclick="runCommand('cat skills/script.py')"><i class="fab fa-python"></i> Python</li>
-                        <li onclick="runCommand('cat skills/active_directory.config')"><i class="fas fa-network-wired"></i> Active Directory</li>
-                        <li onclick="runCommand('cat skills/git.log')"><i class="fab fa-git-alt"></i> Git</li>
-                        <li onclick="runCommand('clear')"><i class="fas fa-eraser"></i> Effacer (clear)</li>
-                    </ul>
+    
+    <div class="entete-section-terminal">
+        <h1>Compétences</h1>
+        <p>Naviguez dans mes compétences via la ligne de commande ou utilisez les boutons.</p>
+    </div>
+
+    <div class="terminal-container">
+        
+        <div class="terminal-sidebar">
+            <h3><i class="fas fa-terminal"></i> Menu</h3>
+            <ul class="command-list">
+                <li onclick="runCommand('ls')"><i class="fas fa-list"></i> Lister (ls)</li>
+                <li onclick="runCommand('cat html.md')"><i class="fab fa-html5"></i> HTML5</li>
+                <li onclick="runCommand('node script.js')"><i class="fab fa-js"></i> JavaScript</li>
+                <li onclick="runCommand('python main.py')"><i class="fab fa-python"></i> Python</li>
+                <li onclick="runCommand('git log')"><i class="fab fa-git-alt"></i> Git</li>
+                <li onclick="runCommand('clear')"><i class="fas fa-eraser"></i> Effacer</li>
+            </ul>
+        </div>
+
+        <div class="terminal-window" onclick="focusTerminal()">
+            <div class="terminal-bar">
+                <div class="buttons">
+                    <div class="circle red"></div>
+                    <div class="circle yellow"></div>
+                    <div class="circle green"></div>
                 </div>
-
-                <div class="terminal-window" onclick="focusTerminal()">
-                    <div class="terminal-bar">
-                        <div class="buttons">
-                            <div class="circle red"></div>
-                            <div class="circle yellow"></div>
-                            <div class="circle green"></div>
-                        </div>
-                        <div class="title">user@portfolio: ~/skills — zsh</div>
-                    </div>
-
-                    <div class="terminal-screen">
-                        <div class="scanline"></div>
-                        <div id="terminal-output">
-                            <div class="line">
-                                <span class="prompt">user@portfolio:~$</span>
-                                <span class="cmd">Bienvenue sur le terminal de Kendi. Tapez 'help' ou cliquez sur les boutons.</span>
-                            </div>
-                            <div class="line"><br></div>
-                        </div>
-
-                        <div class="input-line">
-                            <span class="prompt">user@portfolio:~/skills$</span>
-                            <span id="visible-input"></span><span class="cursor-block">█</span>
-                        </div>
-                        
-                        <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                    </div>
-                </div>
+                <div class="title"><i class="fas fa-home"></i> guest@portfolio: ~/skills</div>
             </div>
-        </section>
+
+            <div class="terminal-screen">
+                <div id="terminal-output">
+                    <div class="line">
+                        <span class="text-muted">Tapez <span class="cyan">'help'</span> pour voir la liste des commandes disponibles.</span>
+                    </div>
+                    <div class="line">
+                        <span class="text-muted">Ou essayez <span class="orange">'ls'</span> pour lister mes compétences.</span>
+                    </div>
+                    <div class="line"><br></div>
+                </div>
+
+                <div class="input-line">
+                    <span class="prompt-arrow">➜</span> <span class="prompt-path">~</span>
+                    <span id="visible-input"></span><span class="cursor-block">█</span>
+                </div>
+                
+                <input type="text" id="hidden-input" autocomplete="off" spellcheck="false">
+            </div>
+
+            <div class="terminal-footer">
+                <span class="footer-label">RACCOURCIS:</span>
+                <button onclick="runCommand('ls')" class="footer-btn blue"><i class="fas fa-list"></i> ls</button>
+                <button onclick="runCommand('cat html.md')" class="footer-btn orange"><i class="fab fa-html5"></i> HTML</button>
+                <button onclick="runCommand('node script.js')" class="footer-btn yellow"><i class="fab fa-js"></i> JS</button>
+                <button onclick="runCommand('python main.py')" class="footer-btn blue-dark"><i class="fab fa-python"></i> Python</button>
+                <button onclick="runCommand('git log')" class="footer-btn pink"><i class="fab fa-git-alt"></i> Git</button>
+                <span class="spacer"></span>
+                <span class="clear-btn" onclick="runCommand('clear')">clear</span>
+            </div>
+        </div>
+    </div>
+</section>
 
         <section class="section-projets" id="projets">
             <div class="entete-projets">
