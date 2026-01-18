@@ -532,15 +532,6 @@ header {
     opacity: 0;
 }
 
-/* Budget Section */
-.section-budget {
-    display: none;
-}
-
-.barre-outils-mobile .outil-link:last-child {
-    display: none;
-}
-
 .barre-outils-mobile {
     display: none !important;
 }
