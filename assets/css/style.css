@@ -662,3 +662,174 @@ header {
         margin: 10% auto;
     }
 }
+
+/* --- CONFIGURATION TERMINAL AVANCÉE --- */
+.section-competences {
+    background-color: #0d1117;
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.terminal-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    flex-wrap: wrap; /* Pour mobile */
+}
+
+/* --- SIDEBAR (Menu d'aide) --- */
+.terminal-sidebar {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 20px;
+    color: #c9d1d9;
+    font-family: var(--font-tertiary);
+    height: fit-content;
+}
+
+.terminal-sidebar h3 {
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #58a6ff;
+}
+
+.sidebar-hint {
+    font-size: 0.8rem;
+    color: #8b949e;
+    margin-bottom: 10px;
+}
+
+.command-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background: #21262d;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.command-list li:hover {
+    background: #30363d;
+    color: #58a6ff;
+    transform: translateX(5px);
+}
+
+/* --- FENÊTRE TERMINAL --- */
+.terminal-window {
+    flex: 3;
+    min-width: 300px;
+    background-color: #0d0f13;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    height: 500px; /* Hauteur fixe pour le scroll */
+}
+
+.terminal-bar {
+    background: #1f2428;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid #333;
+}
+
+.terminal-bar .buttons {
+    position: absolute;
+    left: 15px;
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-bar .circle { width: 12px; height: 12px; border-radius: 50%; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.terminal-bar .title {
+    color: #8b949e;
+    font-family: sans-serif;
+    font-size: 0.85rem;
+}
+
+/* --- ÉCRAN & EFFETS CRT --- */
+.terminal-screen {
+    flex-grow: 1;
+    padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; /* Taille police terminal */
+    color: #f0f6fc;
+    overflow-y: auto;
+    position: relative;
+    cursor: text;
+}
+
+/* Scanline Effect (Lignes TV) */
+.scanline {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+/* --- SAISIE & CURSEUR --- */
+.input-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.prompt {
+    color: #27c93f; /* Vert prompt */
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.cursor-block {
+    color: #58a6ff;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Input caché mais fonctionnel */
+#hidden-input {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+}
+
+/* Couleurs syntaxiques pour les fichiers */
+.txt-col { color: #e34c26; } /* HTML orange */
+.css-col { color: #563d7c; } /* CSS violet/bleu */
+.js-col { color: #f1e05a; } /* JS Jaune */
+.py-col { color: #3572A5; } /* Python Bleu */
+.conf-col { color: #fff; } /* Config Blanc */
+.log-col { color: #f54d27; } /* Git Rouge */
+
+/* Scrollbar personnalisée */
+.terminal-screen::-webkit-scrollbar { width: 10px; }
+.terminal-screen::-webkit-scrollbar-track { background: #0d1117; }
+.terminal-screen::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
