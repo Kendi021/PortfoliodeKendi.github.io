@@ -1,7 +1,7 @@
 // Menu mobile
-document.querySelectorAll("#Close-menu").forEach(function(element) {
+document.querySelectorAll("#fermer-menu").forEach(function(element) {
     element.addEventListener("click", () => {
-        document.querySelector(".container").classList.toggle("show-menu");
+        document.querySelector(".container").classList.toggle("afficher-menu");
     });
 });
 
@@ -21,43 +21,43 @@ function debounce(func, wait, immediate) {
     };
 }
 
-// Scroll animation
-const target = document.querySelectorAll("[data-anime]");
-const animationClass = "animate";
+// Scroll animation (recherche les éléments avec data-animation)
+const cible = document.querySelectorAll("[data-animation]");
+const classeAnimation = "anime";
 
-function animeScroll() {
+function animationScroll() {
     // Calcul pour déclencher l'animation un peu avant le bas de l'écran
-    const windowTop = window.pageYOffset + ((window.innerHeight * 3) / 4);
-    target.forEach(function(element) {
-        if ((windowTop) > element.offsetTop) {
-            element.classList.add(animationClass);
+    const hautFenetre = window.pageYOffset + ((window.innerHeight * 3) / 4);
+    cible.forEach(function(element) {
+        if ((hautFenetre) > element.offsetTop) {
+            element.classList.add(classeAnimation);
         } else {
-            element.classList.remove(animationClass);
+            element.classList.remove(classeAnimation);
         }
     });
 }
 
-if (target.length) {
-    animeScroll(); // Exécuter une fois au chargement
+if (cible.length) {
+    animationScroll(); // Exécuter une fois au chargement
     window.addEventListener('scroll', debounce(function() {
-        animeScroll();
+        animationScroll();
     }, 10));
 }
 
-// Modal Logic (Pop-up Projets)
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if(modal) modal.style.display = "block";
+// Logique de la Modale (Pop-up Projets)
+function ouvrirModale(idModale) {
+    const modale = document.getElementById(idModale);
+    if(modale) modale.style.display = "block";
 }
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if(modal) modal.style.display = "none";
+function fermerModale(idModale) {
+    const modale = document.getElementById(idModale);
+    if(modale) modale.style.display = "none";
 }
 
 // Fermer la modale si on clique en dehors
 window.onclick = function(event) {
-    if (event.target.className === 'modal') {
+    if (event.target.className === 'modale') {
         event.target.style.display = "none";
     }
 };

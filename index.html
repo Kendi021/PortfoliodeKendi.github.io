@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Kendi Cadet, Technicien Support IT et administrateur réseau (BTS SIO SISR).">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
@@ -12,141 +13,140 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/proprieties.css">
     <link rel="stylesheet" href="./assets/css/KeyFrames.css">
-    <title>Portfolio</title>
+    <title>Portfolio - Kendi Cadet</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="hamburguer" id="Close-menu">
-            <div class="line" id="line1"></div>
-            <div class="line" id="line2"></div>
-            <div class="line" id="line3"></div>
+        <div class="menu-burger" id="fermer-menu">
+            <div class="ligne" id="ligne1"></div>
+            <div class="ligne" id="ligne2"></div>
+            <div class="ligne" id="ligne3"></div>
             <span>Fermer</span>
         </div>
 
         <header>
-            <div class="img-wrapper">
-                <img src="./assets/images/backgroundimg.jpg" alt="">
+            <div class="conteneur-image">
+                <img src="./assets/images/backgroundimg.jpg" alt="Image de fond bureau">
             </div>
-            <div class="banner">
-                <h1 class="title-style">Portfolio de Kendi</h1>
-                <p>bts sio sisr</p>
-                <a class="ButtonCustom" id="button-banner" href="./docs/CV de kendi.pdf" target="_blank"
+            <div class="banniere">
+                <h1 class="style-titre">Portfolio de Kendi</h1>
+                <p>BTS SIO SISR</p>
+                <a class="bouton-personnalise" id="bouton-banniere" href="./docs/CV de kendi.pdf" target="_blank"
                     rel="noopener">En savoir plus</a>
             </div>
         </header>
 
-        <aside class="sidebar">
+        <aside class="barre-laterale">
             <nav>
                 <ul class="menu">
-                    <li class="menu-item"><a href="#" class="menu-link">accueil</a></li>
-                    <li class="menu-item"><a href="#conhecimentos" class="menu-link">compétences</a></li>
-                    <li class="menu-item"><a href="#projetos" class="menu-link">projets</a></li>
+                    <li class="element-menu"><a href="#" class="lien-menu">Accueil</a></li>
+                    <li class="element-menu"><a href="#competences" class="lien-menu">Compétences</a></li>
+                    <li class="element-menu"><a href="#projets" class="lien-menu">Projets</a></li>
                 </ul>
             </nav>
-            <div class="social-media">
-                <a href="https://github.com/Kendi021" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <div class="reseaux-sociaux">
+                <a href="https://github.com/Kendi021" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </aside>
 
-        <section class="sessao-conhecimentos">
-            <div class="sessao-header" id="conhecimentos">
-                <h1 class="title-style">Compétences</h1>
+        <section class="section-competences">
+            <div class="entete-section" id="competences">
+                <h1 class="style-titre">Compétences</h1>
             </div>
-            <div class="conhecimentos">
-                <div class="conhecimento" data-anime="left">
-                    <div class="conhecimento-header">
+            <div class="grille-competences">
+                <div class="carte-competence" data-animation="gauche">
+                    <div class="entete-competence">
                         <i class="fab fa-html5"></i>
                         <h3>HTML</h3>
                     </div>
                 </div>
-                <div class="conhecimento" data-anime="right">
-                    <div class="conhecimento-header">
+                <div class="carte-competence" data-animation="droite">
+                    <div class="entete-competence">
                         <i class="fab fa-css3-alt"></i>
                         <h3>CSS</h3>
                     </div>
                 </div>
-                <div class="conhecimento" data-anime="left">
-                    <div class="conhecimento-header">
+                <div class="carte-competence" data-animation="gauche">
+                    <div class="entete-competence">
                         <i class="fab fa-js"></i>
                         <h3>Javascript</h3>
                     </div>
                 </div>
-                <div class="conhecimento" data-anime="right">
-                    <div class="conhecimento-header">
-                        <i class="fab fa-react"></i>
-                        <h3>Active Directory</h3>
+                <div class="carte-competence" data-animation="droite">
+                    <div class="entete-competence">
+                        <i class="fab fa-react"></i> <h3>Active Directory</h3>
                     </div>
                 </div>
-                <div class="conhecimento" data-anime="left">
-                    <div class="conhecimento-header">
+                <div class="carte-competence" data-animation="gauche">
+                    <div class="entete-competence">
                         <i class="fab fa-github"></i>
                         <h3>Git et Github</h3>
                     </div>
                 </div>
-                <div class="conhecimento" data-anime="right">
-                    <div class="conhecimento-header">
+                <div class="carte-competence" data-animation="droite">
+                    <div class="entete-competence">
                         <i class="fab fa-python"></i>
                         <h3>Python</h3>
                     </div>
                 </div>
-                <div class="imagemFundo">
+                <div class="icone-fond">
                     <i class="fa-solid fa-laptop-code"></i>
                 </div>
             </div>
         </section>
 
-        <section class="sessao-projetos" id="projetos">
-            <div class="projetos-header">
+        <section class="section-projets" id="projets">
+            <div class="entete-projets">
                 <h1>Projets</h1>
             </div>
-            <div class="cards">
-                <div class="card" data-anime="up">
-                    <div class="card-img-wrapper">
-                        <img src="./media/proj1.jpg" alt="">
+            <div class="cartes-projets">
+                <div class="carte" data-animation="haut">
+                    <div class="wrapper-img-carte">
+                        <img src="./media/proj1.jpg" alt="Projet VPN">
                     </div>
-                    <div class="background">
-                        <div class="card-info">
-                            <h2>projet 1</h2>
-                            <h3>Vpn</h3>
-                            <button class="ButtonSend" onclick="openModal('vpnModal')">En savoir plus</button>
+                    <div class="carte-overlay">
+                        <div class="info-carte">
+                            <h2>Projet 1</h2>
+                            <h3>VPN</h3>
+                            <button class="bouton-voir" onclick="ouvrirModale('vpnModal')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
-                <div class="card" data-anime="up">
-                    <div class="card-img-wrapper">
-                        <img src="./media/proj2.jpg" alt="">
+                <div class="carte" data-animation="haut">
+                    <div class="wrapper-img-carte">
+                        <img src="./media/proj2.jpg" alt="Projet 2">
                     </div>
-                    <div class="background">
-                        <div class="card-info">
-                            <h2>projet 2</h2>
+                    <div class="carte-overlay">
+                        <div class="info-carte">
+                            <h2>Projet 2</h2>
                             <h3>...</h3>
-                            <button class="ButtonSend">En savoir plus</button>
+                            <button class="bouton-voir">En savoir plus</button>
                         </div>
                     </div>
                 </div>
-                <div class="card" data-anime="up">
-                    <div class="card-img-wrapper">
-                        <img src="./media/proj3.jpg" alt="">
+                <div class="carte" data-animation="haut">
+                    <div class="wrapper-img-carte">
+                        <img src="./media/proj3.jpg" alt="Projet 3">
                     </div>
-                    <div class="background">
-                        <div class="card-info">
-                            <h2>projet 3</h2>
+                    <div class="carte-overlay">
+                        <div class="info-carte">
+                            <h2>Projet 3</h2>
                             <h3>...</h3>
-                            <button class="ButtonSend">En savoir plus</button>
+                            <button class="bouton-voir">En savoir plus</button>
                         </div>
                     </div>
                 </div>
-                <div class="card" data-anime="up">
-                    <div class="card-img-wrapper">
-                        <img src="./media/proj4.jpg" alt="">
+                <div class="carte" data-animation="haut">
+                    <div class="wrapper-img-carte">
+                        <img src="./media/proj4.jpg" alt="Projet 4">
                     </div>
-                    <div class="background">
-                        <div class="card-info">
-                            <h2>projet 4</h2>
+                    <div class="carte-overlay">
+                        <div class="info-carte">
+                            <h2>Projet 4</h2>
                             <h3>...</h3>
-                            <button class="ButtonSend">En savoir plus</button>
+                            <button class="bouton-voir">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -156,14 +156,14 @@
         <div class="barre-outils-mobile">
             <nav>
                 <a href="#" class="outil-link"><i class="fas fa-home"></i><span>Accueil</span></a>
-                <a href="#conhecimentos" class="outil-link"><i class="fas fa-cogs"></i><span>Compétences</span></a>
-                <a href="#projetos" class="outil-link"><i class="fas fa-folder-open"></i><span>Projets</span></a>
+                <a href="#competences" class="outil-link"><i class="fas fa-cogs"></i><span>Compétences</span></a>
+                <a href="#projets" class="outil-link"><i class="fas fa-folder-open"></i><span>Projets</span></a>
             </nav>
         </div>
 
-        <div id="vpnModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('vpnModal')">&times;</span>
+        <div id="vpnModal" class="modale">
+            <div class="contenu-modale">
+                <span class="fermer-modale" onclick="fermerModale('vpnModal')">&times;</span>
                 <iframe src="./docs/Fiche_Projet_VPN_OpenVPN.pdf" type="application/pdf" width="100%" height="600px">
                     <p>Votre navigateur ne supporte pas l'affichage des PDF.
                         <a href="./docs/Fiche_Projet_VPN_OpenVPN.pdf">Cliquez ici pour télécharger le PDF</a>
@@ -175,5 +175,4 @@
 
     <script src="./script.js"></script>
 </body>
-
 </html>
