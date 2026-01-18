@@ -590,3 +590,24 @@ header {
 .fermer-modale:hover {
     color: black;
 }
+
+/* Optimisation pour la modale CV */
+#cvModal .contenu-modale {
+    height: 90vh; /* Prend 90% de la hauteur de l'écran */
+    display: flex;
+    flex-direction: column;
+}
+
+#cvModal iframe {
+    flex-grow: 1; /* L'iframe prend tout l'espace restant */
+    border: none;
+}
+
+/* Ajustement mobile pour que le CV soit lisible */
+@media (max-width: 820px) {
+    #cvModal .contenu-modale {
+        width: 95%; /* Plus large sur mobile */
+        height: 80vh;
+        margin: 10% auto;
+    }
+}
