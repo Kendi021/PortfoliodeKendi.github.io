@@ -247,21 +247,16 @@ function runCommand(text) {
     // Annule toute animation précédente en cours pour éviter les mélanges de texte
     if (typingTimer) clearTimeout(typingTimer);
 
-    // --- OPTIMISATION MOBILE ---
-    // Si l'écran est petit (mobile), on désactive l'animation "machine à écrire".
-    // Cela affiche le résultat instantanément et n'ouvre PAS le clavier.
-    if (window.innerWidth <= 820) {
-        processCommand(text); 
-        inputField.value = ""; 
-        displayField.textContent = "";
-        return; // On arrête la fonction ici pour le mobile
-    }
-
-    // --- MODE BUREAU (ANIMATION) ---
-    // Prépare les champs
+    // --- PRÉPARATION ---
     inputField.value = "";
     displayField.textContent = "";
-    inputField.focus(); // Donne le focus pour que l'utilisateur puisse enchaîner
+
+    // MODIFICATION ICI : 
+    // On ne donne le focus (qui ouvre le clavier) QUE si on est sur ordinateur.
+    // Sur mobile, on aura l'animation visuelle mais pas le clavier virtuel.
+    if (window.innerWidth > 820) {
+        inputField.focus(); 
+    }
 
     let i = 0;
     const speed = 50; // Vitesse de frappe (en ms)
@@ -290,5 +285,6 @@ function runCommand(text) {
 }
 
 // --- 7. INITIALISATION ---
-// Au chargement de la page, si on est sur grand écran, on active le terminal directement.
-if (window.innerWidth > 820) focusTerminal();
+// On supprime l'appel automatique à focusTerminal() pour ne pas faire scroller la page vers le bas.
+// Le terminal s'activera automatiquement dès que l'utilisateur cliquera dessus.
+// if (window.innerWidth > 820) focusTerminal();

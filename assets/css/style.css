@@ -19,6 +19,11 @@ html {
     scroll-behavior: smooth;
 }
 
+/* --- CONTENEUR PRINCIPAL & FADE IN --- */
+.container {
+    animation: opacity 1.5s ease-out;
+}
+
 /* --- ANIMATIONS --- */
 [data-animation] {
     opacity: 0;
