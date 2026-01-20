@@ -276,6 +276,8 @@ function runCommand(text) {
                 processCommand(text);
                 inputField.value = "";
                 displayField.textContent = "";
+                // Force le scroll vers le bas après l'exécution de la commande
+                terminalScreen.scrollTop = terminalScreen.scrollHeight;
             }, 300);
         }
     }
@@ -283,6 +285,18 @@ function runCommand(text) {
     // Lance l'animation
     typeWriter();
 }
+
+// --- 6bis. EVENT LISTENER GLOBAL POUR FORCER LE SCROLL APRÈS CHAQUE CLIC BOUTON ---
+// Cela garantit que le terminal scrolle vers le bas même si runCommand() est appelée directement
+document.addEventListener("click", function(e) {
+    // Si le clic vient d'un bouton ou élément avec runCommand dans onclick
+    if (e.target.onclick && e.target.onclick.toString().includes("runCommand")) {
+        // Attend un court instant pour que le contenu s'ajoute au DOM
+        setTimeout(() => {
+            terminalScreen.scrollTop = terminalScreen.scrollHeight;
+        }, 400);
+    }
+}, true);
 
 // --- 7. INITIALISATION ---
 // On supprime l'appel automatique à focusTerminal() pour ne pas faire scroller la page vers le bas.

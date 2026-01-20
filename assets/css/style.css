@@ -708,6 +708,7 @@ header {
     font-size: 15px;
     flex-grow: 1;
     overflow-y: auto;
+    scroll-behavior: smooth;
     position: relative;
     cursor: text;
     color: #f0f0f0; /* Blanc cassé par défaut */
@@ -835,9 +836,10 @@ header {
     .terminal-window {
         width: 100%;
         min-width: auto;
-        height: 50vh; /* Utilise 50% de la hauteur de l'écran visible */
-        min-height: 400px;
-        margin-bottom: 20px; /* Espace avant la suite */
+        height: 350px;
+        min-height: 350px;
+        max-height: 350px;
+        margin-bottom: 20px;
     }
 
     /* 3. On AFFICHE le footer (boutons) pour naviguer facilement au doigt */
