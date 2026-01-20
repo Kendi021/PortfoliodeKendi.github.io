@@ -297,8 +297,3 @@ document.addEventListener("click", function(e) {
         }, 400);
     }
 }, true);
-
-// --- 7. INITIALISATION ---
-// On supprime l'appel automatique à focusTerminal() pour ne pas faire scroller la page vers le bas.
-// Le terminal s'activera automatiquement dès que l'utilisateur cliquera dessus.
-// if (window.innerWidth > 820) focusTerminal();
