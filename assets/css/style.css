@@ -439,6 +439,28 @@ header {
     opacity: 0;
 }
 
+/* Arrondir la barre outils mobile */
+.barre-outils-mobile {
+  border-radius: 20px 20px 0 0 !important;  /* arrondi en haut uniquement */
+  margin: 0 8px;                            /* petits espaces sur les côtés */
+  backdrop-filter: blur(12px);              /* effet verre dépoli */
+  background: rgba(34, 34, 34, 0.95) !important;
+}
+
+/* Optionnel : coins plus arrondis pour les icônes */
+.outil-link {
+  border-radius: 12px;
+  padding: 8px 12px;
+  transition: all 0.2s;
+}
+
+.outil-link:hover,
+.outil-link:active {
+  background: rgba(245, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+
 /* --- MOBILE SPECIFIQUE --- */
 .barre-outils-mobile {
     display: none !important;
