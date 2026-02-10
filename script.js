@@ -103,7 +103,7 @@ const fileSystem = {
     <span class="output-title title-html">HTML5 & CSS3</span>
     <div class="info-grid">
         <span class="label">Niveau:</span>
-        <span class="value progress-bar">[==================  ] 70%</span>
+        <span class="value progress-bar">[==============-------] 70%</span>
         <span class="label">Focus:</span>
         <span class="value">Structure sémantique, Responsive Design</span>
         <span class="label">Projets:</span>
@@ -114,7 +114,7 @@ const fileSystem = {
     <span class="output-title title-js">JavaScript (Bases)</span>
     <div class="info-grid">
         <span class="label">Niveau:</span>
-        <span class="value progress-bar">[==========          ] 45%</span>
+        <span class="value progress-bar">[==========----------] 45%</span>
         <span class="label">Notions:</span>
         <span class="value">Manipulation du DOM, Événements, Fonctions</span>
         <span class="label">Usage:</span>
@@ -125,7 +125,7 @@ const fileSystem = {
     <span class="output-title title-py">Python Scripting</span>
     <div class="info-grid">
         <span class="label">Niveau:</span>
-        <span class="value progress-bar">[==========          ] 45%</span>
+        <span class="value progress-bar">[==========----------] 45%</span>
         <span class="label">Modules:</span>
         <span class="value">os, sys, shutil (Gestion de fichiers)</span>
         <span class="label">Usage:</span>
@@ -136,7 +136,7 @@ const fileSystem = {
     <span class="output-title" style="color: #e06c75; border-bottom: 1px dashed #e06c75; display:inline-block; margin-bottom:10px;">Administration Linux</span>
     <div class="info-grid">
         <span class="label">Niveau:</span>
-        <span class="value progress-bar">[===============     ] 75%</span>
+        <span class="value progress-bar">[==============-------] 75%</span>
         <span class="label">Distros:</span>
         <span class="value">Debian, Ubuntu, CentOS, Rocky Linux</span>
         <span class="label">Compétences:</span>
@@ -149,7 +149,7 @@ const fileSystem = {
     <span class="output-title" style="color: #29b6f6; border-bottom: 1px dashed #29b6f6; display:inline-block; margin-bottom:10px;">Active Directory & Windows Server</span>
     <div class="info-grid">
         <span class="label">Niveau:</span>
-        <span class="value progress-bar">[===============     ] 60%</span>
+        <span class="value progress-bar">[==============-------] 60%</span>
         <span class="label">Services:</span>
         <span class="value">AD DS, DNS, DHCP, GPO</span>
         <span class="label">Outils:</span>
