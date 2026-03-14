@@ -12,7 +12,6 @@
 body {
     background-color: #ffffff;
     overflow-x: hidden;
-    padding-bottom: 48px;
 }
 
 html {
@@ -303,7 +302,7 @@ header {
 /* --- PROJETS --- */
 .section-projets {
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
     box-shadow: 1px 12px 71px -13px rgba(0, 0, 0, 0.55);
 }
 
@@ -318,7 +317,7 @@ header {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    padding-bottom: 8rem;
+    padding-bottom: 0;
     padding-top: 3rem;
     background-color: #ededf2;
     background-image: linear-gradient(180deg, #fafafa 0%, #dadbdb 100%);
@@ -439,77 +438,8 @@ header {
     opacity: 0;
 }
 
-/* Arrondir la barre outils mobile */
-.barre-outils-mobile {
-  border-radius: 20px 20px 0 0 !important;  /* arrondi en haut uniquement */
-  margin: 0 8px;                            /* petits espaces sur les côtés */
-  backdrop-filter: blur(12px);              /* effet verre dépoli */
-  background: rgba(34, 34, 34, 0.95) !important;
-}
-
-/* Optionnel : coins plus arrondis pour les icônes */
-.outil-link {
-  border-radius: 12px;
-  padding: 8px 12px;
-  transition: all 0.2s;
-}
-
-.outil-link:hover,
-.outil-link:active {
-  background: rgba(245, 0, 0, 0.2);
-  transform: scale(1.05);
-}
-
-
 /* --- MOBILE SPECIFIQUE --- */
-.barre-outils-mobile {
-    display: none !important;
-}
-
 @media (max-width: 820px) {
-    .barre-outils-mobile {
-        display: flex !important;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #222;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0.5rem 0;
-        z-index: 9999;
-        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .barre-outils-mobile nav {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .outil-link {
-        color: #fff;
-        text-decoration: none;
-        font-size: 0.9em;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0.2em 0.5em;
-    }
-
-    .outil-link i {
-        font-size: 1.3em;
-        margin-bottom: 2px;
-    }
-
-    .outil-link span {
-        font-size: 0.7em;
-    }
-
-    .outil-link:hover {
-        color: #f50000;
-    }
-
     .barre-laterale,
     .menu-burger {
         display: none !important;
