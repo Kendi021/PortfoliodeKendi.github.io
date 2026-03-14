@@ -1,4 +1,25 @@
 /* ==========================================================================
+   PRELOADER (ÉCRAN DE CHARGEMENT)
+   ========================================================================== */
+const preloader = document.getElementById("preloader");
+
+window.addEventListener("load", () => {
+    document.body.classList.remove("preloading");
+
+    if (!preloader) return;
+
+    // Garde l'animation visible un court instant pour un rendu plus fluide.
+    const minimumDisplay = 900;
+    const elapsed = performance.now();
+    const remainingTime = Math.max(0, minimumDisplay - elapsed);
+
+    setTimeout(() => {
+        preloader.classList.add("preloader--hidden");
+        preloader.addEventListener("transitionend", () => preloader.remove(), { once: true });
+    }, remainingTime);
+});
+
+/* ==========================================================================
    GESTION DU MENU MOBILE
    ========================================================================== */
 // Gère l'ouverture et la fermeture du menu latéral sur mobile et tablette.
