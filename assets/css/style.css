@@ -81,6 +81,7 @@ html {
 }
 
 @keyframes loaderPulse {
+
     0%,
     100% {
         box-shadow: 0 0 20px rgba(255, 61, 61, 0.3);
@@ -92,6 +93,7 @@ html {
 }
 
 @keyframes loaderTextBlink {
+
     0%,
     100% {
         opacity: 0.45;
@@ -519,6 +521,7 @@ header {
 
 /* --- MOBILE SPECIFIQUE --- */
 @media (max-width: 820px) {
+
     .barre-laterale,
     .menu-burger {
         display: none !important;

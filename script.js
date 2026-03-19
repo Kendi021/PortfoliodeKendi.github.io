@@ -1,14 +1,9 @@
-/* ==========================================================================
-   PRELOADER (ÉCRAN DE CHARGEMENT)
-   ========================================================================== */
 const preloader = document.getElementById("preloader");
 
 window.addEventListener("load", () => {
     document.body.classList.remove("preloading");
-
     if (!preloader) return;
 
-    // Garde l'animation visible un court instant pour un rendu plus fluide.
     const minimumDisplay = 900;
     const elapsed = performance.now();
     const remainingTime = Math.max(0, minimumDisplay - elapsed);
@@ -19,28 +14,20 @@ window.addEventListener("load", () => {
     }, remainingTime);
 });
 
-/* ==========================================================================
-   GESTION DU MENU MOBILE
-   ========================================================================== */
-// Gère l'ouverture et la fermeture du menu latéral sur mobile et tablette.
-// Au clic sur le bouton croix/burger, on ajoute ou retire la classe CSS qui affiche le menu.
-document.querySelectorAll("#fermer-menu").forEach(function(element) {
-    element.addEventListener("click", () => {
-        document.querySelector(".container").classList.toggle("afficher-menu");
-    });
-});
+const menuToggle = document.getElementById("fermer-menu");
+const container = document.querySelector(".container");
 
-/* ==========================================================================
-   FONCTION UTILITAIRE : DEBOUNCE
-   ========================================================================== */
-// Cette fonction sert à optimiser les performances.
-// Elle empêche une fonction d'être appelée trop souvent (ex: lors du scroll).
-// Elle "patiente" que l'utilisateur arrête de scroller avant de lancer l'action.
+if (menuToggle && container) {
+    menuToggle.addEventListener("click", () => {
+        container.classList.toggle("afficher-menu");
+    });
+}
+
 function debounce(func, wait, immediate) {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         const context = this;
-        const later = function() {
+        const later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -51,65 +38,37 @@ function debounce(func, wait, immediate) {
     };
 }
 
-/* ==========================================================================
-   ANIMATIONS AU DÉFILEMENT (SCROLL)
-   ========================================================================== */
-// Sélectionne tous les éléments HTML qui doivent s'animer (ceux avec l'attribut data-animation)
-const cible = document.querySelectorAll("[data-animation]");
-const classeAnimation = "anime"; // La classe CSS qui déclenche l'apparition
+const animatedElements = document.querySelectorAll("[data-animation]");
+const animationClass = "anime";
 
 function animationScroll() {
-    // On définit le point de déclenchement : au 3/4 de la hauteur de la fenêtre
-    const hautFenetre = window.pageYOffset + ((window.innerHeight * 3) / 4);
-    
-    cible.forEach(function(element) {
-        // Si l'élément est visible à l'écran, on ajoute la classe "anime"
-        if ((hautFenetre) > element.offsetTop) {
-            element.classList.add(classeAnimation);
-        } else {
-            // Sinon on la retire (pour pouvoir rejouer l'animation si on remonte)
-            element.classList.remove(classeAnimation);
-        }
+    const windowTrigger = window.pageYOffset + (window.innerHeight * 3) / 4;
+    animatedElements.forEach((element) => {
+        element.classList.toggle(animationClass, windowTrigger > element.offsetTop);
     });
 }
 
-// On lance l'animation au chargement de la page et lors du scroll (avec debounce pour la fluidité)
-if (cible.length) {
-    animationScroll(); 
-    window.addEventListener('scroll', debounce(function() {
-        animationScroll();
-    }, 10));
+if (animatedElements.length) {
+    animationScroll();
+    window.addEventListener("scroll", debounce(animationScroll, 10));
 }
 
-/* ==========================================================================
-   GESTION DES FENÊTRES MODALES (POP-UPS)
-   ========================================================================== */
-// Ouvre une modale spécifique (ex: détail d'un projet ou CV) via son ID
 function ouvrirModale(idModale) {
     const modale = document.getElementById(idModale);
-    if(modale) modale.style.display = "block";
+    if (modale) modale.style.display = "block";
 }
 
-// Ferme la modale
 function fermerModale(idModale) {
     const modale = document.getElementById(idModale);
-    if(modale) modale.style.display = "none";
+    if (modale) modale.style.display = "none";
 }
 
-// Ferme la modale automatiquement si l'utilisateur clique sur le fond gris (en dehors du contenu)
-window.onclick = function(event) {
-    if (event.target.className === 'modale') {
+window.addEventListener("click", (event) => {
+    if (event.target.className === "modale") {
         event.target.style.display = "none";
     }
-};
+});
 
-/* ==========================================================================
-   LOGIQUE DU TERMINAL INTERACTIF
-   ========================================================================== */
-
-// --- 1. SYSTÈME DE FICHIERS VIRTUEL ---
-// Cet objet contient toutes les réponses que le terminal peut donner.
-// Clé = commande tapée par l'utilisateur, Valeur = Code HTML affiché en réponse.
 const fileSystem = {
     "ls": `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top:10px;">
         <span style="color: #ffab40; font-weight:bold;">html.md</span>
@@ -180,43 +139,33 @@ const fileSystem = {
     </div>`
 };
 
-// --- 2. SÉLECTION DES ÉLÉMENTS DU DOM ---
-const terminalOutput = document.getElementById("terminal-output"); // La zone où s'affiche l'historique
-const hiddenInput = document.getElementById("hidden-input");       // L'input caché qui capture la frappe clavier
-const visibleInput = document.getElementById("visible-input");     // La zone visible qui recopie ce qu'on tape
-const terminalScreen = document.querySelector(".terminal-screen"); // L'écran global pour gérer le scroll
+const terminalOutput = document.getElementById("terminal-output");
+const hiddenInput = document.getElementById("hidden-input");
+const visibleInput = document.getElementById("visible-input");
+const terminalScreen = document.querySelector(".terminal-screen");
 
-// Variable pour stocker le timer de l'animation d'écriture (pour pouvoir l'annuler si besoin)
 let typingTimer;
 
-// --- 3. GESTION DU FOCUS (CLAVIER) ---
 function focusTerminal() {
-    // IMPORTANT : On n'active le clavier QUE sur ordinateur (> 820px).
-    // Sur mobile, cela évite que le clavier virtuel ne masque l'écran inutilement.
     if (window.innerWidth > 820) {
         hiddenInput.focus();
     }
 }
 
-// --- 4. SYNCHRONISATION DE LA SAISIE ---
-// Recopie ce que l'utilisateur tape dans l'input caché vers l'affichage visible (style terminal)
 hiddenInput.addEventListener("input", () => {
     visibleInput.textContent = hiddenInput.value;
 });
 
-// Détecte la touche "Entrée" pour valider la commande
 hiddenInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        const input = hiddenInput.value.trim(); // Récupère le texte sans espaces inutiles
-        processCommand(input);                  // Traite la commande
-        hiddenInput.value = "";                 // Vide l'input
-        visibleInput.textContent = "";          // Vide l'affichage
+        const input = hiddenInput.value.trim();
+        processCommand(input);
+        hiddenInput.value = "";
+        visibleInput.textContent = "";
     }
 });
 
-// --- 5. TRAITEMENT DES COMMANDES ---
 function processCommand(cmd) {
-    // A. Affiche la ligne de commande que l'utilisateur vient de valider
     const historyLine = document.createElement("div");
     historyLine.className = "line";
     historyLine.innerHTML = `
@@ -225,22 +174,18 @@ function processCommand(cmd) {
     `;
     terminalOutput.appendChild(historyLine);
 
-    // B. Analyse la commande (minuscules, sans espaces)
     const cleanCmd = cmd.toLowerCase().trim();
     let response = "";
 
-    // C. Cherche la réponse correspondante
     if (cleanCmd === "help") {
         response = "Commandes: ls, cat [fichier], node [fichier], python [fichier], linux, active directory, clear";
     } else if (cleanCmd === "clear") {
-        terminalOutput.innerHTML = ""; // Vide tout l'historique
+        terminalOutput.innerHTML = "";
         return;
     } else if (fileSystem[cleanCmd]) {
-        // Commande exacte trouvée dans notre "fileSystem"
         response = fileSystem[cleanCmd];
     } else {
-        // Recherche approximative (ex: si on tape juste "node" au lieu de "node script.js")
-        const partialKey = Object.keys(fileSystem).find(key => key.includes(cleanCmd) || key.startsWith(cleanCmd));
+        const partialKey = Object.keys(fileSystem).find((key) => key.includes(cleanCmd) || key.startsWith(cleanCmd));
         if (partialKey) {
             response = fileSystem[partialKey];
         } else {
@@ -248,7 +193,6 @@ function processCommand(cmd) {
         }
     }
 
-    // D. Affiche la réponse générée
     if (response) {
         const responseLine = document.createElement("div");
         responseLine.className = "line";
@@ -256,65 +200,68 @@ function processCommand(cmd) {
         terminalOutput.appendChild(responseLine);
     }
 
-    // E. Scrolle automatiquement vers le bas pour voir la dernière réponse
     terminalScreen.scrollTop = terminalScreen.scrollHeight;
 }
 
-// --- 6. EXÉCUTION AUTOMATIQUE (Clic sur les boutons) ---
 function runCommand(text) {
-    const inputField = document.getElementById("hidden-input");
-    const displayField = document.getElementById("visible-input");
-    
-    // Annule toute animation précédente en cours pour éviter les mélanges de texte
+    const inputField = hiddenInput;
+    const displayField = visibleInput;
+
     if (typingTimer) clearTimeout(typingTimer);
 
-    // --- PRÉPARATION ---
     inputField.value = "";
     displayField.textContent = "";
 
-    // MODIFICATION ICI : 
-    // On ne donne le focus (qui ouvre le clavier) QUE si on est sur ordinateur.
-    // Sur mobile, on aura l'animation visuelle mais pas le clavier virtuel.
     if (window.innerWidth > 820) {
-        inputField.focus(); 
+        inputField.focus();
     }
 
     let i = 0;
-    const speed = 50; // Vitesse de frappe (en ms)
+    const speed = 50;
 
-    // Fonction récursive qui écrit lettre par lettre
     function typeWriter() {
         if (i < text.length) {
-            let char = text.charAt(i);
+            const char = text.charAt(i);
             inputField.value += char;
             displayField.textContent += char;
             i++;
-            // On enregistre le timer pour pouvoir l'annuler si l'utilisateur clique ailleurs
             typingTimer = setTimeout(typeWriter, speed);
         } else {
-            // Une fois fini d'écrire, on valide la commande après une courte pause
             typingTimer = setTimeout(() => {
                 processCommand(text);
                 inputField.value = "";
                 displayField.textContent = "";
-                // Force le scroll vers le bas après l'exécution de la commande
                 terminalScreen.scrollTop = terminalScreen.scrollHeight;
             }, 300);
         }
     }
 
-    // Lance l'animation
     typeWriter();
 }
 
-// --- 6bis. EVENT LISTENER GLOBAL POUR FORCER LE SCROLL APRÈS CHAQUE CLIC BOUTON ---
-// Cela garantit que le terminal scrolle vers le bas même si runCommand() est appelée directement
-document.addEventListener("click", function(e) {
-    // Si le clic vient d'un bouton ou élément avec runCommand dans onclick
+document.addEventListener("click", function (e) {
     if (e.target.onclick && e.target.onclick.toString().includes("runCommand")) {
-        // Attend un court instant pour que le contenu s'ajoute au DOM
         setTimeout(() => {
             terminalScreen.scrollTop = terminalScreen.scrollHeight;
         }, 400);
     }
 }, true);
+
+if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute("data-src");
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll("img[data-src]").forEach((img) => {
+        imageObserver.observe(img);
+    });
+}
