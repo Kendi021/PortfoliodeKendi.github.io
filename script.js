@@ -16,12 +16,32 @@ window.addEventListener("load", () => {
 
 const menuToggle = document.getElementById("fermer-menu");
 const container = document.querySelector(".container");
+const menuLinks = document.querySelectorAll(".lien-menu");
+
+function setMenuState(isOpen) {
+    if (!menuToggle || !container) return;
+
+    container.classList.toggle("afficher-menu", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+}
 
 if (menuToggle && container) {
     menuToggle.addEventListener("click", () => {
-        container.classList.toggle("afficher-menu");
+        const isOpen = !container.classList.contains("afficher-menu");
+        setMenuState(isOpen);
+    });
+
+    menuToggle.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        const isOpen = !container.classList.contains("afficher-menu");
+        setMenuState(isOpen);
     });
 }
+
+menuLinks.forEach((link) => {
+    link.addEventListener("click", () => setMenuState(false));
+});
 
 function debounce(func, wait, immediate) {
     let timeout;
@@ -66,6 +86,15 @@ function fermerModale(idModale) {
 window.addEventListener("click", (event) => {
     if (event.target.className === "modale") {
         event.target.style.display = "none";
+    }
+});
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        setMenuState(false);
+        document.querySelectorAll(".modale").forEach((modal) => {
+            modal.style.display = "none";
+        });
     }
 });
 

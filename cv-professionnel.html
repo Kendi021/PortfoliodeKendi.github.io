@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="cyber">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,10 @@
   <meta name="description" content="CV professionnel de Kendi Cadet - Apprenti en informatique BTS SIO option SISR." />
   <meta name="keywords"
     content="Kendi Cadet, CV, BTS SIO, SISR, cybersécurité, administration réseau, support informatique" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8R2R7p5S0w0z7R7A0iYfJ0z6LJ8mA1w=="
@@ -20,6 +24,11 @@
 
   <main id="contenu">
     <header id="accueil" class="reveal">
+      <div class="theme-switcher" role="group" aria-label="Variantes visuelles du CV">
+        <span class="theme-label">Style</span>
+        <button type="button" class="theme-btn" data-theme="corporate" aria-pressed="false">Version recruteur</button>
+        <button type="button" class="theme-btn is-active" data-theme="cyber" aria-pressed="true">Version cybersécurité</button>
+      </div>
       <h1>KENDI CADET</h1>
       <p class="hero-role">Technicien Support IT • Étudiant BTS SIO SISR • Objectif Cybersécurité</p>
       <p class="hero-intro">Profil polyvalent orienté terrain, avec une forte appétence pour l'administration système, le réseau et la sécurisation des infrastructures.</p>
@@ -193,6 +202,32 @@
   </main>
 
   <script>
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const root = document.documentElement;
+    const THEME_KEY = 'cv-theme';
+
+    function applyTheme(theme) {
+      const safeTheme = theme === 'cyber' ? 'cyber' : 'corporate';
+      root.setAttribute('data-theme', safeTheme);
+
+      themeButtons.forEach((button) => {
+        const isActive = button.dataset.theme === safeTheme;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    applyTheme(savedTheme || 'cyber');
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const nextTheme = button.dataset.theme;
+        applyTheme(nextTheme);
+        localStorage.setItem(THEME_KEY, nextTheme);
+      });
+    });
+
     const revealElements = document.querySelectorAll('.reveal');
 
     if (!('IntersectionObserver' in window)) {

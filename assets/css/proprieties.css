@@ -1,6 +1,6 @@
-:root{
-    --font-primary: "Baloo Da 2", serif;
-    --font-secondary: "Josefin Slab", serif;
-    --font-tertiary: 'JetBrains Mono', monospace;
-    --font-action: "Mulish", serif;
+:root {
+    --font-primary: "Archivo", "Segoe UI", sans-serif;
+    --font-secondary: "Space Grotesk", "Segoe UI", sans-serif;
+    --font-tertiary: "JetBrains Mono", monospace;
+    --font-action: "Archivo", "Segoe UI", sans-serif;
 }
