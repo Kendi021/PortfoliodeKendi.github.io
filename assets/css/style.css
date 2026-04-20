@@ -491,10 +491,10 @@ header {
     gap: 1.2rem;
 }
 
-.terminal-sidebar,
+
 .terminal-window {
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-md);
+    border: 10px solid var(--border);
+    
 }
 
 .terminal-sidebar {
@@ -549,7 +549,7 @@ header {
 }
 
 .terminal-window {
-    overflow: hidden;
+    overflow:auto ;
     border-radius: 22px;
     background: #0c1220;
     display: flex;
@@ -1016,7 +1016,7 @@ iframe {
     }
 
     .terminal-window {
-        min-height: 500px;
+        min-height: 200px;
     }
 
     .terminal-footer {
