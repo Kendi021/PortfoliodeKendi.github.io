@@ -11,6 +11,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <link rel="manifest" href="assets/images/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta property="og:title" content="Portfolio - Kendi Cadet">
+    <meta property="og:description" content="Portfolio de Kendi Cadet, Technicien Support IT et administrateur réseau (BTS SIO SISR).">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kendi021.github.io/">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/proprieties.css">
     <link rel="stylesheet" href="./assets/css/KeyFrames.css">
@@ -27,7 +34,8 @@
     </div>
 
     <div class="container">
-        <div class="menu-burger" id="fermer-menu" role="button" tabindex="0" aria-label="Ouvrir ou fermer le menu" aria-expanded="false">
+        <div class="menu-burger" id="fermer-menu" role="button" tabindex="0" aria-label="Ouvrir ou fermer le menu"
+            aria-expanded="false">
             <div class="ligne" id="ligne1"></div>
             <div class="ligne" id="ligne2"></div>
             <div class="ligne" id="ligne3"></div>
@@ -36,12 +44,27 @@
 
         <header>
             <div class="conteneur-image">
-                <img src="./assets/images/backgroundimg.jpg" alt="Image de fond bureau">
+                <img src="./assets/images/backgroundimg.jpg" alt="Image de fond bureau" fetchpriority="high" decoding="async">
+            </div>
+            <div class="hero-visuals">
+                <div class="floating-badge" style="right: 5%; top: 10%;">
+                    <i class="fas fa-server"></i>
+                    <span>Infrastructure</span>
+                </div>
+                <div class="floating-badge" style="right: 2%; top: 50%;">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Sécurité</span>
+                </div>
+                <div class="floating-badge" style="right: 8%; bottom: 15%;">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Réseau</span>
+                </div>
             </div>
             <div class="banniere">
                 <p class="hero-kicker">Technicien Support IT • Réseau • Systèmes</p>
                 <h1>Portfolio de Kendi</h1>
-                <p class="hero-subtitle">Étudiant BTS SIO SISR, orienté support, administration système et cybersécurité opérationnelle.</p>
+                <p class="hero-subtitle">Étudiant BTS SIO SISR, orienté support, administration système et cybersécurité
+                    opérationnelle.</p>
                 <div class="hero-highlights" aria-label="Points clés du profil">
                     <span class="hero-chip">Alternance recherchée</span>
                     <span class="hero-chip">Windows / Linux / AD</span>
@@ -59,6 +82,7 @@
                 <p class="menu-intro">Navigation rapide</p>
                 <ul class="menu">
                     <li class="element-menu"><a href="#" class="lien-menu">Accueil</a></li>
+                    <li class="element-menu"><a href="#a-propos" class="lien-menu">À propos</a></li>
                     <li class="element-menu"><a href="#competences" class="lien-menu">Compétences</a></li>
                     <li class="element-menu"><a href="#projets" class="lien-menu">Projets</a></li>
                     <li class="element-menu"><a href="./cv-professionnel.html" class="lien-menu"><i
@@ -68,194 +92,277 @@
             <div class="reseaux-sociaux">
                 <a href="https://github.com/Kendi021" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
                         class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i
-                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </aside>
 
+        <main id="contenu-principal">
+        <section class="section-a-propos" id="a-propos">
+            <div class="entete-section-terminal" data-animation="haut">
+                <h2>À propos de moi</h2>
+                <p>Mon parcours, mes motivations et ce qui m'anime en tant que futur technicien IT.</p>
+            </div>
+
+            <div class="propos-container">
+                <div class="propos-content" data-animation="gauche">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>2024 – Aujourd'hui</h3>
+                            <p class="timeline-role">BTS SIO SISR – Lycée Rouvière, Toulon</p>
+                            <p>Formation en solutions d'infrastructure, systèmes et réseaux. Projets pratiques sur VPN, Active Directory et administration Linux.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>2024</h3>
+                            <p class="timeline-role">Serveur VPN automatisé</p>
+                            <p>Déploiement d'OpenVPN sur Linux avec script d'installation automatisé et génération du client administrateur.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>2023</h3>
+                            <p class="timeline-role">Premiers projets Web</p>
+                            <p>Développement de sites statiques en HTML/CSS, découverte du JavaScript et de la mise en page responsive.</p>
+                        </div>
+                    </div>
+
+                    <div class="motivations">
+                        <h3>Ce qui m'anime</h3>
+                        <ul class="values-list">
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Résoudre des problèmes complexes</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Apprendre en continu</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Collaborer avec d'autres passionnés</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="testimonials" data-animation="droite">
+                    <h3>Ce qu'ils disent de moi</h3>
+                    <div class="testimonial-grid">
+                        <div class="testimonial-card">
+                            <p>« Kendi fait preuve d'une grande curiosité technique et d'une capacité à progresser rapidement sur des environnements complexes. »</p>
+                            <cite><i class="fas fa-user-tie" aria-hidden="true"></i> Formateur BTS SIO</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <p>« Rigoureux et autonome, il s'implique dans chaque projet avec sérieux et va toujours chercher à comprendre le fond des choses. »</p>
+                            <cite><i class="fas fa-user" aria-hidden="true"></i> Camarade de promotion</cite>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section-competences" id="competences">
             <div class="entete-section-terminal" data-animation="haut">
-                <h1>Compétences</h1>
-                <p>Une lecture rapide de mes compétences techniques à travers une interface terminal inspirée des environnements d'administration.</p>
+                <h2>Compétences</h2>
+                <p>Une lecture rapide de mes compétences techniques à travers une interface terminal inspirée des
+                    environnements d'administration.</p>
             </div>
 
-            
 
-                <div class="terminal-window" onclick="focusTerminal()" data-animation="haut">
-                    <div class="terminal-bar">
-                        <div class="buttons">
-                            <div class="circle red"></div>
-                            <div class="circle yellow"></div>
-                            <div class="circle green"></div>
-                        </div>
-                        <div class="title"><i class="fas fa-home"></i> guest@portfolio: ~/skills</div>
+
+            <div class="terminal-window" role="application" aria-label="Terminal de compétences interactif" onclick="focusTerminal()" data-animation="haut">
+                <div class="terminal-bar" role="toolbar">
+                    <div class="buttons">
+                        <div class="circle red"></div>
+                        <div class="circle yellow"></div>
+                        <div class="circle green"></div>
                     </div>
+                    <div class="title"><i class="fas fa-home"></i> guest@portfolio: ~/skills</div>
+                </div>
 
-                    <div class="terminal-screen">
-                        <div id="terminal-output">
-                            <div class="line">
-                                <span class="text-muted">Tapez <span class="cyan">'help'</span> pour voir la liste des
-                                    commandes disponibles.</span>
-                            </div>
-                            <div class="line">
-                                <span class="text-muted">Ou essayez <span class="orange">'ls'</span> pour lister mes
-                                    compétences.</span>
-                            </div>
-                            <div class="line"><br></div>
-                        </div>
-
-                        <div class="input-line">
-                            <span class="prompt-arrow">➜</span> <span class="prompt-path">~</span>
-                            <span id="visible-input"></span><span class="cursor-block">█</span>
-                        </div>
-
-                        <input type="text" id="hidden-input" autocomplete="off" spellcheck="false">
+                <div class="terminal-screen" 
+                     tabindex="0" 
+                     role="textbox" 
+                     aria-multiline="true"
+                     aria-label="Sortie du terminal">
+                    <div id="terminal-output" aria-live="polite" aria-atomic="false"></div>
+                    
+                    <div class="input-line">
+                        <span class="prompt-arrow" aria-hidden="true">➜</span>
+                        <span class="prompt-path" aria-hidden="true">~</span>
+                        <span id="visible-input" aria-hidden="true"></span>
+                        <span class="cursor-block" aria-hidden="true">█</span>
                     </div>
+                    
+                    <input type="text" 
+                           id="hidden-input" 
+                           autocomplete="off" 
+                           spellcheck="false"
+                           aria-label="Commande terminal" />
+                </div>
 
-                    <div class="terminal-footer">
-                        <span class="footer-label">RACCOURCIS:</span>
-                        <button type="button" onclick="runCommand('ls')" class="footer-btn"><i
-                                class="fas fa-list"></i> ls</button>
-                        <button type="button" onclick="runCommand('cat html.md')" class="footer-btn"><i
-                                class="fab fa-html5"></i> HTML</button>
-                        <button type="button" onclick="runCommand('node script.js')" class="footer-btn"><i
-                                class="fab fa-js"></i> JS</button>
-                        <button type="button" onclick="runCommand('python main.py')" class="footer-btn"><i
-                                class="fab fa-python"></i> Python</button>
-                        <button type="button" onclick="runCommand('cat linux.txt')" class="footer-btn"><i
-                                class="fab fa-linux"></i> Linux</button>
-                        <button type="button" onclick="runCommand('active directory')" class="footer-btn"><i
-                                class="fab fa-windows"></i> AD</button>
-                        <span class="spacer"></span>
-                        <span class="clear-btn" onclick="runCommand('clear')">clear</span>
-                    </div>
+                <div class="terminal-footer" role="toolbar" aria-label="Raccourcis de commandes">
+                    <span class="footer-label">RACCOURCIS:</span>
+                    <button type="button" onclick="runCommand('ls')" class="footer-btn" aria-label="Lister les compétences"><i class="fas fa-list"></i>
+                        ls</button>
+                    <button type="button" onclick="runCommand('cat html.md')" class="footer-btn" aria-label="Voir compétences HTML"><i
+                            class="fab fa-html5"></i> HTML</button>
+                    <button type="button" onclick="runCommand('node script.js')" class="footer-btn" aria-label="Voir compétences JavaScript"><i
+                            class="fab fa-js"></i> JS</button>
+                    <button type="button" onclick="runCommand('python main.py')" class="footer-btn" aria-label="Voir compétences Python"><i
+                            class="fab fa-python"></i> Python</button>
+                    <button type="button" onclick="runCommand('cat linux.txt')" class="footer-btn" aria-label="Voir compétences Linux"><i
+                            class="fab fa-linux"></i> Linux</button>
+                    <button type="button" onclick="runCommand('active directory')" class="footer-btn" aria-label="Voir compétences Active Directory"><i
+                            class="fab fa-windows"></i> AD</button>
+                    <span class="spacer"></span>
+                    <button type="button" onclick="runCommand('clear')" class="clear-btn" aria-label="Effacer l'écran">clear</button>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
 
-        <section class="section-projets" id="projets">
-            <div class="entete-projets">
-                <div class="section-heading-block">
-                    <p class="section-kicker">Réalisations</p>
-                    <h1>Projets</h1>
-                    <p>Des projets orientés infrastructure, automatisation et mise en pratique des environnements systèmes et réseau.</p>
-                </div>
+    <section class="section-projets" id="projets">
+        <div class="entete-projets">
+            <div class="section-heading-block">
+                <p class="section-kicker">Réalisations</p>
+                <h2>Projets</h2>
+                <p>Des projets orientés infrastructure, automatisation et mise en pratique des environnements systèmes
+                    et réseau.</p>
             </div>
-            <div class="cartes-projets">
-                <div class="carte" data-animation="haut">
-                    <div class="wrapper-img-carte">
-                        <img src="./media/proj1.jpg" alt="Projet OpenVPN sécurisé">
-                    </div>
-                    <div class="carte-overlay">
-                        <div class="info-carte">
-                            <span class="project-badge">Réseau</span>
-                            <h2>OpenVPN sécurisé</h2>
-                            <h3>Accès distant chiffré</h3>
-                            <p>Configuration d'un VPN pour sécuriser les connexions distantes avec logique d'administration et validation du trafic.</p>
-                            <ul class="project-points">
-                                <li>Automatisation de l'installation OpenVPN sur Linux</li>
-                                <li>Paramétrage UDP 1194 et génération du client administrateur</li>
-                                <li>Documentation projet disponible en PDF</li>
-                            </ul>
-                            <div class="project-actions">
-                                <button class="bouton-voir" onclick="ouvrirModale('vpnModal')">Voir le projet</button>
-                                <a class="bouton-voir bouton-voir-secondaire" href="./docs/Fiche_Projet_VPN_OpenVPN.pdf" target="_blank" rel="noopener noreferrer">Ouvrir la fiche</a>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+        <div class="cartes-projets">
+            <div class="carte" data-animation="haut">
+                <div class="wrapper-img-carte">
+                    <img src="./media/proj1.jpg" alt="Projet OpenVPN sécurisé" loading="lazy">
                 </div>
-                <div class="carte" data-animation="haut">
-                    <div class="wrapper-img-carte">
-                        <img src="./media/proj2.jpg" alt="Projet infrastructure à venir">
-                    </div>
-                    <div class="carte-overlay">
-                        <div class="info-carte">
-                            <span class="project-badge">À venir</span>
-                            <h2> ?</h2>
-                            <h3>En préparation</h3>
-                            <p>...</p>
-                            <ul class="project-points">
-                                <li>Contenu en attente</li>
-                                <li>Détails techniques à venir</li>
-                                <li>Présentation publiée quand le projet sera finalisé</li>
-                            </ul>
-                            <div class="project-actions">
-                                <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carte" data-animation="haut">
-                    <div class="wrapper-img-carte">
-                        <img src="./media/proj3.jpg" alt="Projet support informatique à venir">
-                    </div>
-                    <div class="carte-overlay">
-                        <div class="info-carte">
-                            <span class="project-badge">À venir</span>
-                            <h2> ?</h2>
-                            <h3>En préparation</h3>
-                            <p>...</p>
-                            <ul class="project-points">
-                                <li>Contenu en attente</li>
-                                <li>Retour d'expérience à venir</li>
-                                <li>Publication après validation du projet</li>
-                            </ul>
-                            <div class="project-actions">
-                                <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carte" data-animation="haut">
-                    <div class="wrapper-img-carte">
-                        <img src="./media/proj4.jpg" alt="Projet web à venir">
-                    </div>
-                    <div class="carte-overlay">
-                        <div class="info-carte">
-                            <span class="project-badge">À venir</span>
-                            <h2> ?</h2>
-                            <h3>En préparation</h3>
-                            <p>...</p>
-                            <ul class="project-points">
-                                <li>Contenu en attente</li>
-                                <li>Démo à venir</li>
-                                <li>Mise en ligne quand le projet sera prêt</li>
-                            </ul>
-                            <div class="project-actions">
-                                <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="vpnModal" class="modale">
-            <div class="contenu-modale">
-                <span class="fermer-modale" onclick="fermerModale('vpnModal')">&times;</span>
-                <div class="project-modal-body">
-                    <div class="project-modal-copy">
+                <div class="carte-overlay">
+                    <div class="info-carte">
                         <span class="project-badge">Réseau</span>
-                        <h2>Projet OpenVPN sécurisé</h2>
-                        <p>Projet pédagogique centré sur la mise en place d'un accès distant sécurisé. L'objectif était de déployer un serveur VPN, standardiser l'installation et produire une configuration réutilisable.</p>
-                        <ul class="modal-points">
-                            <li>Script shell d'installation automatique basé sur le projet angristan/openvpn-install.</li>
-                            <li>Paramètres définis pour un déploiement cohérent: protocole UDP, port 1194, client administrateur et configuration non interactive.</li>
-                            <li>Production d'une fiche projet PDF et d'un script prêt à rejouer pour faciliter la démonstration.</li>
+                        <h3>OpenVPN sécurisé</h3>
+                        <h4>Accès distant chiffré</h4>
+                        <p>Configuration d'un VPN pour sécuriser les connexions distantes avec logique d'administration
+                            et validation du trafic.</p>
+                        <ul class="project-points">
+                            <li>Automatisation de l'installation OpenVPN sur Linux</li>
+                            <li>Paramétrage UDP 1194 et génération du client administrateur</li>
+                            <li>Documentation projet disponible en PDF</li>
                         </ul>
-                        <div class="project-links">
-                            <a class="bouton-voir" href="./docs/Fiche_Projet_VPN_OpenVPN.pdf" target="_blank" rel="noopener noreferrer">Ouvrir la fiche PDF</a>
-                            <a class="bouton-voir bouton-voir-secondaire" href="./docs/auto-vpn.sh.txt" target="_blank" rel="noopener noreferrer">Voir le script</a>
+                        <div class="project-meta">
+                            <div class="tech-stack">
+                                <span class="tech-badge">OpenVPN</span>
+                                <span class="tech-badge">Linux</span>
+                                <span class="tech-badge">Bash</span>
+                            </div>
+                            <div class="impact-metrics">
+                                <span class="metric"><i class="fas fa-clock"></i> 3 mois</span>
+                                <span class="metric"><i class="fas fa-code-branch"></i> Git</span>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="bouton-voir" onclick="ouvrirModale('vpnModal')">Voir le projet</button>
+                            <a class="bouton-voir bouton-voir-secondaire" href="./docs/Fiche_Projet_VPN_OpenVPN.pdf"
+                                target="_blank" rel="noopener noreferrer">Ouvrir la fiche</a>
                         </div>
                     </div>
-                    <iframe src="./docs/Fiche_Projet_VPN_OpenVPN.pdf" width="100%" height="600">
-                        <p>Votre navigateur ne supporte pas l'affichage des PDF.
-                            <a href="./docs/Fiche_Projet_VPN_OpenVPN.pdf">Cliquez ici pour télécharger le PDF</a>
-                        </p>
-                    </iframe>
+                </div>
+            </div>
+            <div class="carte" data-animation="haut">
+                <div class="wrapper-img-carte">
+                    <img src="./media/proj2.jpg" alt="Projet infrastructure à venir" loading="lazy">
+                </div>
+                <div class="carte-overlay">
+                    <div class="info-carte">
+                        <span class="project-badge">À venir</span>
+                        <h3> ?</h3>
+                        <h4>En préparation</h4>
+                        <p>...</p>
+                        <ul class="project-points">
+                            <li>Contenu en attente</li>
+                            <li>Détails techniques à venir</li>
+                            <li>Présentation publiée quand le projet sera finalisé</li>
+                        </ul>
+                        <div class="project-actions">
+                            <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carte" data-animation="haut">
+                <div class="wrapper-img-carte">
+                    <img src="./media/proj3.jpg" alt="Projet support informatique à venir" loading="lazy">
+                </div>
+                <div class="carte-overlay">
+                    <div class="info-carte">
+                        <span class="project-badge">À venir</span>
+                        <h3> ?</h3>
+                        <h4>En préparation</h4>
+                        <p>...</p>
+                        <ul class="project-points">
+                            <li>Contenu en attente</li>
+                            <li>Retour d'expérience à venir</li>
+                            <li>Publication après validation du projet</li>
+                        </ul>
+                        <div class="project-actions">
+                            <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carte" data-animation="haut">
+                <div class="wrapper-img-carte">
+                    <img src="./media/proj4.jpg" alt="Projet web à venir" loading="lazy">
+                </div>
+                <div class="carte-overlay">
+                    <div class="info-carte">
+                        <span class="project-badge">À venir</span>
+                        <h3> ?</h3>
+                        <h4>En préparation</h4>
+                        <p>...</p>
+                        <ul class="project-points">
+                            <li>Contenu en attente</li>
+                            <li>Démo à venir</li>
+                            <li>Mise en ligne quand le projet sera prêt</li>
+                        </ul>
+                        <div class="project-actions">
+                            <button class="bouton-voir" type="button" disabled>Bientôt disponible</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+
+        </main>
+
+        <footer class="site-footer" aria-label="Pied de page">
+            <p class="footer-copy">&copy; 2025 Kendi Cadet &middot;
+                <a href="https://github.com/Kendi021" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </p>
+        </footer>
+
+    <div id="vpnModal" class="modale" role="dialog" aria-modal="true" aria-labelledby="vpnModalTitle">
+        <div class="contenu-modale">
+            <button class="fermer-modale" onclick="fermerModale('vpnModal')" aria-label="Fermer la modale">&times;</button>
+            <div class="project-modal-body">
+                <div class="project-modal-copy">
+                    <span class="project-badge">Réseau</span>
+                    <h3 id="vpnModalTitle">Projet OpenVPN sécurisé</h3>
+                    <p>Projet pédagogique centré sur la mise en place d'un accès distant sécurisé. L'objectif était de
+                        déployer un serveur VPN, standardiser l'installation et produire une configuration réutilisable.
+                    </p>
+                    <ul class="modal-points">
+                        <li>Script shell d'installation automatique basé sur le projet angristan/openvpn-install.</li>
+                        <li>Paramètres définis pour un déploiement cohérent: protocole UDP, port 1194, client
+                            administrateur et configuration non interactive.</li>
+                        <li>Production d'une fiche projet PDF et d'un script prêt à rejouer pour faciliter la
+                            démonstration.</li>
+                    </ul>
+                    <div class="project-links">
+                        <a class="bouton-voir" href="./docs/Fiche_Projet_VPN_OpenVPN.pdf" target="_blank"
+                            rel="noopener noreferrer">Ouvrir la fiche PDF</a>
+                        <a class="bouton-voir bouton-voir-secondaire" href="./docs/auto-vpn.sh.txt" target="_blank"
+                            rel="noopener noreferrer">Voir le script</a>
+                    </div>
+                </div>
+                <iframe src="./docs/Fiche_Projet_VPN_OpenVPN.pdf" width="100%" height="600" title="Fiche projet VPN OpenVPN">
+                    <p>Votre navigateur ne supporte pas l'affichage des PDF.
+                        <a href="./docs/Fiche_Projet_VPN_OpenVPN.pdf">Cliquez ici pour télécharger le PDF</a>
+                    </p>
+                </iframe>
+            </div>
+        </div>
+    </div>
 
 
     </div>

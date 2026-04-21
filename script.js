@@ -174,6 +174,38 @@ const visibleInput = document.getElementById("visible-input");
 const terminalScreen = document.querySelector(".terminal-screen");
 
 let typingTimer;
+const commandHistory = [];
+let historyIndex = -1;
+const lazyCommands = new Map();
+
+function addToHistory(cmd) {
+    if (cmd && cmd !== 'clear') {
+        commandHistory.push(cmd);
+        historyIndex = commandHistory.length;
+    }
+}
+
+function loadCommandModule(commandName) {
+    if (lazyCommands.has(commandName)) return Promise.resolve();
+    
+    return new Promise((resolve, reject) => {
+        const module = document.createElement('script');
+        module.src = `./commands/${commandName}.js`;
+        module.async = true;
+        
+        module.onload = () => {
+            lazyCommands.set(commandName, true);
+            resolve();
+        };
+        
+        module.onerror = () => {
+            console.warn(`Module de commande '${commandName}' non trouvé`);
+            resolve();
+        };
+        
+        document.head.appendChild(module);
+    });
+}
 
 function focusTerminal() {
     if (window.innerWidth > 820) {
@@ -188,9 +220,28 @@ hiddenInput.addEventListener("input", () => {
 hiddenInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const input = hiddenInput.value.trim();
+        addToHistory(input);
         processCommand(input);
         hiddenInput.value = "";
         visibleInput.textContent = "";
+    } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (historyIndex > 0) {
+            historyIndex--;
+            hiddenInput.value = commandHistory[historyIndex];
+            visibleInput.textContent = hiddenInput.value;
+        }
+    } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            hiddenInput.value = commandHistory[historyIndex];
+            visibleInput.textContent = hiddenInput.value;
+        } else {
+            historyIndex = commandHistory.length;
+            hiddenInput.value = "";
+            visibleInput.textContent = "";
+        }
     }
 });
 
@@ -245,27 +296,31 @@ function runCommand(text) {
         inputField.focus();
     }
 
-    let i = 0;
-    const speed = 50;
+    // Charger le module de commande lazily
+    const commandName = text.toLowerCase().split(' ')[0];
+    loadCommandModule(commandName).then(() => {
+        let i = 0;
+        const speed = 50;
 
-    function typeWriter() {
-        if (i < text.length) {
-            const char = text.charAt(i);
-            inputField.value += char;
-            displayField.textContent += char;
-            i++;
-            typingTimer = setTimeout(typeWriter, speed);
-        } else {
-            typingTimer = setTimeout(() => {
-                processCommand(text);
-                inputField.value = "";
-                displayField.textContent = "";
-                terminalScreen.scrollTop = terminalScreen.scrollHeight;
-            }, 300);
+        function typeWriter() {
+            if (i < text.length) {
+                const char = text.charAt(i);
+                inputField.value += char;
+                displayField.textContent += char;
+                i++;
+                typingTimer = setTimeout(typeWriter, speed);
+            } else {
+                typingTimer = setTimeout(() => {
+                    processCommand(text);
+                    inputField.value = "";
+                    displayField.textContent = "";
+                    terminalScreen.scrollTop = terminalScreen.scrollHeight;
+                }, 300);
+            }
         }
-    }
 
-    typeWriter();
+        typeWriter();
+    });
 }
 
 document.addEventListener("click", function (e) {
@@ -276,21 +331,83 @@ document.addEventListener("click", function (e) {
     }
 }, true);
 
-if ("IntersectionObserver" in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute("data-src");
-                    observer.unobserve(img);
-                }
+// Initialisation du lazy loading pour les boutons de commandes
+if (terminalScreen) {
+    const footerButtons = document.querySelectorAll('.footer-btn, .clear-btn');
+    footerButtons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            const onclickAttr = btn.getAttribute('onclick') || '';
+            const match = onclickAttr.match(/runCommand\('([^']+)'\)/);
+            if (match) {
+                const command = match[1].toLowerCase().split(' ')[0];
+                loadCommandModule(command);
             }
         });
     });
+}
 
-    document.querySelectorAll("img[data-src]").forEach((img) => {
+if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const imageSrc = img.dataset.src || img.src;
+                
+                if (!imageSrc) {
+                    observer.unobserve(img);
+                    return;
+                }
+
+                // Création du placeholder avec dégradé de chargement
+                const placeholder = document.createElement('div');
+                placeholder.style.cssText = `
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(135deg, 
+                        rgba(43,119,255,0.1) 0%, 
+                        transparent 50%,
+                        rgba(0,194,255,0.1) 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1;
+                    transition: opacity 0.3s ease;
+                `;
+                
+                // Insertion du placeholder avant l'image
+                const wrapper = img.parentNode;
+                if (wrapper && wrapper.style.position !== 'absolute' && wrapper.style.position !== 'fixed' && wrapper.style.position !== 'relative') {
+                    wrapper.style.position = 'relative';
+                }
+                wrapper.insertBefore(placeholder, img);
+                
+                // Chargement progressif de l'image
+                const image = new Image();
+                image.src = imageSrc;
+                image.onload = () => {
+                    img.src = imageSrc;
+                    placeholder.style.opacity = '0';
+                    setTimeout(() => {
+                        if (placeholder.parentNode) {
+                            placeholder.remove();
+                        }
+                    }, 300);
+                    if (img.dataset.src) {
+                        img.removeAttribute("data-src");
+                    }
+                };
+                
+                image.onerror = () => {
+                    placeholder.remove();
+                };
+                
+                observer.unobserve(img);
+            }
+        });
+    }, { threshold: [0, 0.1] });
+
+    // Observer toutes les images avec data-src ou dans les cartes
+    document.querySelectorAll("img[data-src], .carte img").forEach((img) => {
         imageObserver.observe(img);
     });
 }
