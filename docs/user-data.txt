@@ -1,17 +1,101 @@
 #cloud-config
+# ============================================================
+# Ubuntu Autoinstall – Serveur VPN OpenVPN
+# Usage : placer ce fichier dans /cdrom/nocloud/user-data
+#         avec un fichier meta-data vide à côté.
+# Génération du hash : openssl passwd -6 'VotreMotDePasse'
+# Génération de la clé SSH : ssh-keygen -t ed25519 -C "vpn-admin"
+# ============================================================
 autoinstall:
   version: 1
+
+  # --- Localisation ---
+  locale: fr_FR.UTF-8
+  keyboard:
+    layout: fr
+    variant: ""
+  timezone: Europe/Paris
+
+  # --- Identité machine ---
   identity:
-    hostname: vpn-server-usb
-    password: "$6$rounds=4096$randomsalt$G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G.G" # Mettre un vrai hash ici ou changer après install
-    username: admin
+    hostname: vpn-server
+    username: adminvpn
+    # Remplacer par un vrai hash : openssl passwd -6 'VotreMotDePasse'
+    password: "$6$rounds=4096$CHANGEMOI$REMPLACER_PAR_HASH_REEL"
     realname: Admin VPN
+
+  # --- Réseau (DHCP sur première interface) ---
+  network:
+    version: 2
+    ethernets:
+      enp0s3:
+        dhcp4: true
+
+  # --- Stockage (LVM automatique sur disque entier) ---
+  storage:
+    layout:
+      name: lvm
+
+  # --- SSH (clé publique obligatoire, mot de passe désactivé) ---
   ssh:
     install-server: true
-    allow-pw: true
+    allow-pw: false
+    authorized-keys:
+      # Remplacer par votre clé publique Ed25519
+      - "ssh-ed25519 AAAA_REMPLACER_PAR_VOTRE_CLE_PUBLIQUE adminvpn@vpn-server"
+
+  # --- Paquets installés pendant l'autoinstall ---
+  packages:
+    - curl
+    - wget
+    - ufw
+    - fail2ban
+    - unattended-upgrades
+
+  # --- Fichiers écrits avant les commandes finales ---
+  write_files:
+    - path: /root/auto-vpn.sh
+      permissions: "0700"
+      owner: root:root
+      content: |
+        #!/bin/bash
+        # === Déploiement automatique OpenVPN (angristan/openvpn-install) ===
+        set -euo pipefail
+
+        export AUTO_INSTALL=y
+        export APPROVE_INSTALL=y
+        export APPROVE_IP=y
+        export IPV6_SUPPORT=n
+        export PORT_CHOICE=1        # UDP 1194
+        export PROTOCOL_CHOICE=1   # UDP
+        export DNS=1               # DNS système
+        export COMPRESSION_ENABLED=n
+        export CUSTOMIZE_ENC=n
+        export CLIENT="client-admin"
+        export PASS=1              # Pas de mot de passe client
+
+        curl -fsSL https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh \
+          -o /root/openvpn-install.sh
+        chmod +x /root/openvpn-install.sh
+        /root/openvpn-install.sh
+
+        echo "==========================================="
+        echo "OpenVPN installé avec succès."
+        echo "Fichier client : /root/client-admin.ovpn"
+        echo "==========================================="
+
+  # --- Commandes exécutées à la fin de l'installation ---
   late-commands:
-    # Télécharge ton script (tu devras héberger le script auto-vpn.sh quelque part, ex: GitHub Gist ou serveur web)
-    # Si tu ne peux pas héberger, il faut copier le fichier depuis la clé USB, ce qui est plus complexe.
-    - curtin in-target --target=/target -- wget https://ton-site-web.com/auto-vpn.sh -O /root/auto-vpn.sh
-    - curtin in-target --target=/target -- chmod +x /root/auto-vpn.sh
-    - curtin in-target --target=/target -- /root/auto-vpn.sh
+    # Exécuter le script d'installation VPN
+    - curtin in-target --target=/target -- bash /root/auto-vpn.sh
+    # Configurer le pare-feu
+    - curtin in-target --target=/target -- ufw allow OpenSSH
+    - curtin in-target --target=/target -- ufw allow 1194/udp
+    - curtin in-target --target=/target -- ufw --force enable
+    # Sécuriser SSH : désactiver l'authentification root
+    - >-
+      curtin in-target --target=/target --
+      sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+
+  # --- Redémarrage automatique après installation ---
+  shutdown: reboot

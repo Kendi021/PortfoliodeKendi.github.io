@@ -13,19 +13,23 @@
     <link rel="manifest" href="assets/images/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <meta property="og:title" content="Portfolio - Kendi Cadet">
-    <meta property="og:description" content="Portfolio de Kendi Cadet, Technicien Support IT et administrateur réseau (BTS SIO SISR).">
+    <meta property="og:description"
+        content="Portfolio de Kendi Cadet, Technicien Support IT et administrateur réseau (BTS SIO SISR).">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kendi021.github.io/">
     <meta name="twitter:card" content="summary">
+    <!-- Font Awesome (icônes) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Feuille de style principale -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/proprieties.css">
-    <link rel="stylesheet" href="./assets/css/KeyFrames.css">
-    <link rel="stylesheet" href="./assets/css/optimizations.css">
     <title>Portfolio - Kendi Cadet</title>
 </head>
 
 <body class="preloading">
+    <!-- PRÉCHARGEUR -->
     <div id="preloader" class="preloader" aria-hidden="true">
         <div class="preloader__content">
             <div class="preloader__ring"></div>
@@ -34,6 +38,7 @@
     </div>
 
     <div class="container">
+        <!-- MENU BURGER (ouvrir/fermer la navigation latérale) -->
         <div class="menu-burger" id="fermer-menu" role="button" tabindex="0" aria-label="Ouvrir ou fermer le menu"
             aria-expanded="false">
             <div class="ligne" id="ligne1"></div>
@@ -42,9 +47,11 @@
             <span>Fermer</span>
         </div>
 
+        <!-- HEADER / HERO -->
         <header>
             <div class="conteneur-image">
-                <img src="./assets/images/backgroundimg.jpg" alt="Image de fond bureau" fetchpriority="high" decoding="async">
+                <img src="./assets/images/backgroundimg.jpg" alt="Image de fond bureau" fetchpriority="high"
+                    decoding="async">
             </div>
             <div class="hero-visuals">
                 <div class="floating-badge" style="right: 5%; top: 10%;">
@@ -77,6 +84,7 @@
             </div>
         </header>
 
+        <!-- NAVIGATION LATÉRALE -->
         <aside class="barre-laterale">
             <nav>
                 <p class="menu-intro">Navigation rapide</p>
@@ -97,117 +105,127 @@
             </div>
         </aside>
 
+        <!-- CONTENU PRINCIPAL -->
         <main id="contenu-principal">
-        <section class="section-a-propos" id="a-propos">
-            <div class="entete-section-terminal" data-animation="haut">
-                <h2>À propos de moi</h2>
-                <p>Mon parcours, mes motivations et ce qui m'anime en tant que futur technicien IT.</p>
-            </div>
-
-            <div class="propos-container">
-                <div class="propos-content" data-animation="gauche">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <h3>2024 – Aujourd'hui</h3>
-                            <p class="timeline-role">BTS SIO SISR – Lycée Rouvière, Toulon</p>
-                            <p>Formation en solutions d'infrastructure, systèmes et réseaux. Projets pratiques sur VPN, Active Directory et administration Linux.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>2024</h3>
-                            <p class="timeline-role">Serveur VPN automatisé</p>
-                            <p>Déploiement d'OpenVPN sur Linux avec script d'installation automatisé et génération du client administrateur.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>2023</h3>
-                            <p class="timeline-role">Premiers projets Web</p>
-                            <p>Développement de sites statiques en HTML/CSS, découverte du JavaScript et de la mise en page responsive.</p>
-                        </div>
-                    </div>
-
-                    <div class="motivations">
-                        <h3>Ce qui m'anime</h3>
-                        <ul class="values-list">
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Résoudre des problèmes complexes</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Apprendre en continu</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Collaborer avec d'autres passionnés</li>
-                        </ul>
-                    </div>
+            <section class="section-a-propos" id="a-propos">
+                <div class="entete-section-terminal" data-animation="haut">
+                    <h2>À propos de moi</h2>
+                    <p>Mon parcours, mes motivations et ce qui m'anime en tant que futur technicien IT.</p>
                 </div>
 
-                <div class="testimonials" data-animation="droite">
-                    <h3>Ce qu'ils disent de moi</h3>
-                    <div class="testimonial-grid">
-                        <div class="testimonial-card">
-                            <p>« Kendi fait preuve d'une grande curiosité technique et d'une capacité à progresser rapidement sur des environnements complexes. »</p>
-                            <cite><i class="fas fa-user-tie" aria-hidden="true"></i> Formateur BTS SIO</cite>
+                <div class="propos-container">
+                    <div class="propos-content" data-animation="gauche">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h3>2026 – Aujourd'hui</h3>
+                                <p class="timeline-role">Apprenti Support Informatique – Sorel Energies</p>
+                                <ul class="project-points">
+                                    <li>Gestion et résolution des incidents informatiques niveaux 1 et 2</li>
+                                    <li>Mise en place d'une procédure de sauvegarde des données</li>
+                                    <li>Participation au déploiement d'un système de gestion des tickets et du parc
+                                        informatique</li>
+                                </ul>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>2026 – Aujourd'hui</h3>
+                                <p class="timeline-role">BTS SIO SISR – l'Iris, Paris</p>
+                                <p>Formation en solutions d'infrastructure, systèmes et réseaux. Projets pratiques sur
+                                    VPN, Active Directory et administration Linux.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>2024 – 2025</h3>
+                                <p class="timeline-role">BTS SIO SISR – Éstiam, Paris</p>
+                                <p>Projet : déploiement d'un serveur VPN sécurisé sous Linux avec script
+                                    d'installation automatisé et génération du profil client administrateur.</p>
+                            </div>
                         </div>
-                        <div class="testimonial-card">
-                            <p>« Rigoureux et autonome, il s'implique dans chaque projet avec sérieux et va toujours chercher à comprendre le fond des choses. »</p>
-                            <cite><i class="fas fa-user" aria-hidden="true"></i> Camarade de promotion</cite>
+
+                        <div class="motivations">
+                            <h3>Ce qui m'anime</h3>
+                            <ul class="values-list">
+                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Résoudre des problèmes
+                                    complexes</li>
+                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Apprendre en continu</li>
+                                <li><i class="fas fa-check-circle" aria-hidden="true"></i> Collaborer avec d'autres
+                                    passionnés</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="testimonials" data-animation="droite">
+                        <h3>Ce qu'ils disent de moi</h3>
+                        <div class="testimonial-grid">
+                            <div class="testimonial-card">
+                                <p>« Kendi fait preuve d'une grande curiosité technique et d'une capacité à progresser
+                                    rapidement sur des environnements complexes. »</p>
+                                <cite><i class="fas fa-user-tie" aria-hidden="true"></i> Formateur BTS SIO</cite>
+                            </div>
+                            <div class="testimonial-card">
+                                <p>« Rigoureux et autonome, il s'implique dans chaque projet avec sérieux et va toujours
+                                    chercher à comprendre le fond des choses. »</p>
+                                <cite><i class="fas fa-user" aria-hidden="true"></i> Camarade de promotion</cite>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section-competences" id="competences">
-            <div class="entete-section-terminal" data-animation="haut">
-                <h2>Compétences</h2>
-                <p>Une lecture rapide de mes compétences techniques à travers une interface terminal inspirée des
-                    environnements d'administration.</p>
-            </div>
-
+            <section class="section-competences" id="competences">
+                <div class="entete-section-terminal" data-animation="haut">
+                    <h2>Compétences</h2>
+                    <p>Une lecture rapide de mes compétences techniques à travers une interface terminal inspirée des
+                        environnements d'administration.</p>
+                </div>
 
 
-            <div class="terminal-window" role="application" aria-label="Terminal de compétences interactif" onclick="focusTerminal()" data-animation="haut">
-                <div class="terminal-bar" role="toolbar">
-                    <div class="buttons">
-                        <div class="circle red"></div>
-                        <div class="circle yellow"></div>
-                        <div class="circle green"></div>
+
+                <div class="terminal-window" role="application" aria-label="Terminal de compétences interactif"
+                    onclick="focusTerminal()" data-animation="haut">
+                    <div class="terminal-bar" role="toolbar">
+                        <div class="buttons">
+                            <div class="circle red"></div>
+                            <div class="circle yellow"></div>
+                            <div class="circle green"></div>
+                        </div>
+                        <div class="title"><i class="fas fa-home"></i> Kendi@portfolio: ~/skills</div>
                     </div>
-                    <div class="title"><i class="fas fa-home"></i> guest@portfolio: ~/skills</div>
-                </div>
 
-                <div class="terminal-screen" 
-                     tabindex="0" 
-                     role="textbox" 
-                     aria-multiline="true"
-                     aria-label="Sortie du terminal">
-                    <div id="terminal-output" aria-live="polite" aria-atomic="false"></div>
-                    
-                    <div class="input-line">
-                        <span class="prompt-arrow" aria-hidden="true">➜</span>
-                        <span class="prompt-path" aria-hidden="true">~</span>
-                        <span id="visible-input" aria-hidden="true"></span>
-                        <span class="cursor-block" aria-hidden="true">█</span>
+                    <div class="terminal-screen" tabindex="0" role="textbox" aria-multiline="true"
+                        aria-label="Sortie du terminal">
+                        <div id="terminal-output" aria-live="polite" aria-atomic="false"></div>
+
+                        <div class="input-line">
+                            <span class="prompt-arrow" aria-hidden="true">➜</span>
+                            <span class="prompt-path" aria-hidden="true">~</span>
+                            <span id="visible-input" aria-hidden="true"></span>
+                            <span class="cursor-block" aria-hidden="true">█</span>
+                        </div>
+
+                        <input type="text" id="hidden-input" autocomplete="off" spellcheck="false"
+                            aria-label="Commande terminal" />
                     </div>
-                    
-                    <input type="text" 
-                           id="hidden-input" 
-                           autocomplete="off" 
-                           spellcheck="false"
-                           aria-label="Commande terminal" />
-                </div>
 
-                <div class="terminal-footer" role="toolbar" aria-label="Raccourcis de commandes">
-                    <span class="footer-label">RACCOURCIS:</span>
-                    <button type="button" onclick="runCommand('ls')" class="footer-btn" aria-label="Lister les compétences"><i class="fas fa-list"></i>
-                        ls</button>
-                    <button type="button" onclick="runCommand('cat html.md')" class="footer-btn" aria-label="Voir compétences HTML"><i
-                            class="fab fa-html5"></i> HTML</button>
-                    <button type="button" onclick="runCommand('node script.js')" class="footer-btn" aria-label="Voir compétences JavaScript"><i
-                            class="fab fa-js"></i> JS</button>
-                    <button type="button" onclick="runCommand('python main.py')" class="footer-btn" aria-label="Voir compétences Python"><i
-                            class="fab fa-python"></i> Python</button>
-                    <button type="button" onclick="runCommand('cat linux.txt')" class="footer-btn" aria-label="Voir compétences Linux"><i
-                            class="fab fa-linux"></i> Linux</button>
-                    <button type="button" onclick="runCommand('active directory')" class="footer-btn" aria-label="Voir compétences Active Directory"><i
-                            class="fab fa-windows"></i> AD</button>
-                    <span class="spacer"></span>
-                    <button type="button" onclick="runCommand('clear')" class="clear-btn" aria-label="Effacer l'écran">clear</button>
+                    <div class="terminal-footer" role="toolbar" aria-label="Raccourcis de commandes">
+                        <span class="footer-label">RACCOURCIS:</span>
+                        <button type="button" onclick="runCommand('ls')" class="footer-btn"
+                            aria-label="Lister les compétences"><i class="fas fa-list"></i>
+                            ls</button>
+                        <button type="button" onclick="runCommand('cat html.md')" class="footer-btn"
+                            aria-label="Voir compétences HTML"><i class="fab fa-html5"></i> HTML</button>
+                        <button type="button" onclick="runCommand('node script.js')" class="footer-btn"
+                            aria-label="Voir compétences JavaScript"><i class="fab fa-js"></i> JS</button>
+                        <button type="button" onclick="runCommand('python main.py')" class="footer-btn"
+                            aria-label="Voir compétences Python"><i class="fab fa-python"></i> Python</button>
+                        <button type="button" onclick="runCommand('cat linux.txt')" class="footer-btn"
+                            aria-label="Voir compétences Linux"><i class="fab fa-linux"></i> Linux</button>
+                        <button type="button" onclick="runCommand('active directory')" class="footer-btn"
+                            aria-label="Voir compétences Active Directory"><i class="fab fa-windows"></i> Windows
+                            Server</button>
+                        <span class="spacer"></span>
+                        <button type="button" onclick="runCommand('clear')" class="clear-btn"
+                            aria-label="Effacer l'écran">clear</button>
+                    </div>
                 </div>
-            </div>
     </div>
     </section>
 
@@ -322,31 +340,38 @@
         </div>
     </section>
 
-        </main>
+    </main>
 
-        <footer class="site-footer" aria-label="Pied de page">
-            <p class="footer-copy">&copy; 2025 Kendi Cadet &middot;
-                <a href="https://github.com/Kendi021" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
-                <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </p>
-        </footer>
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-label="Pied de page">
+        <p class="footer-copy">&copy; 2026 Kendi Cadet &middot;
+            <a href="https://github.com/Kendi021" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+            <a href="https://www.linkedin.com/in/kendi-cadet" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </p>
+    </footer>
 
+    <!-- MODALE : DÉTAIL PROJET VPN -->
     <div id="vpnModal" class="modale" role="dialog" aria-modal="true" aria-labelledby="vpnModalTitle">
         <div class="contenu-modale">
-            <button class="fermer-modale" onclick="fermerModale('vpnModal')" aria-label="Fermer la modale">&times;</button>
+            <button class="fermer-modale" onclick="fermerModale('vpnModal')"
+                aria-label="Fermer la modale">&times;</button>
             <div class="project-modal-body">
                 <div class="project-modal-copy">
-                    <span class="project-badge">Réseau</span>
-                    <h3 id="vpnModalTitle">Projet OpenVPN sécurisé</h3>
-                    <p>Projet pédagogique centré sur la mise en place d'un accès distant sécurisé. L'objectif était de
-                        déployer un serveur VPN, standardiser l'installation et produire une configuration réutilisable.
+                    <span class="project-badge">Réseau &amp; Infrastructure</span>
+                    <h3 id="vpnModalTitle">Serveur VPN automatisé</h3>
+                    <p>Déploiement complet d'un serveur OpenVPN sur Ubuntu, avec provisioning automatique via
+                        <strong>cloud-init</strong> et installation non-interactive basée sur le script
+                        <em>angristan/openvpn-install</em>.
                     </p>
                     <ul class="modal-points">
-                        <li>Script shell d'installation automatique basé sur le projet angristan/openvpn-install.</li>
-                        <li>Paramètres définis pour un déploiement cohérent: protocole UDP, port 1194, client
-                            administrateur et configuration non interactive.</li>
-                        <li>Production d'une fiche projet PDF et d'un script prêt à rejouer pour faciliter la
-                            démonstration.</li>
+                        <li><strong>Cloud-config Ubuntu</strong> : locale, stockage LVM, authentification SSH par clé
+                            Ed25519, accès root désactivé.</li>
+                        <li><strong>Pare-feu UFW</strong> préconfigué (SSH + UDP 1194) et <strong>Fail2ban</strong>
+                            activé dès le premier démarrage.</li>
+                        <li><strong>Script Bash idempotent</strong> : protocole UDP, port 1194, génération automatique
+                            du profil client <code>client-admin.ovpn</code>.</li>
+                        <li>Infrastructure PKI complète (CA, certificat serveur, clé Diffie-Hellman, TLS 1.3 /
+                            AES-256-GCM).</li>
                     </ul>
                     <div class="project-links">
                         <a class="bouton-voir" href="./docs/Fiche_Projet_VPN_OpenVPN.pdf" target="_blank"
@@ -355,11 +380,45 @@
                             rel="noopener noreferrer">Voir le script</a>
                     </div>
                 </div>
-                <iframe src="./docs/Fiche_Projet_VPN_OpenVPN.pdf" width="100%" height="600" title="Fiche projet VPN OpenVPN">
-                    <p>Votre navigateur ne supporte pas l'affichage des PDF.
-                        <a href="./docs/Fiche_Projet_VPN_OpenVPN.pdf">Cliquez ici pour télécharger le PDF</a>
-                    </p>
-                </iframe>
+                <div class="vpn-demo-panel">
+                    <nav class="vpn-tabs" role="tablist" aria-label="Vues du projet VPN">
+                        <button class="vpn-tab vpn-tab--active" role="tab" aria-selected="true"
+                            aria-controls="vpn-pane-demo" id="vpn-btn-demo" data-pane="vpn-pane-demo">
+                            <i class="fas fa-terminal"></i> Démo simulée
+                        </button>
+                        <button class="vpn-tab" role="tab" aria-selected="false" aria-controls="vpn-pane-pdf"
+                            id="vpn-btn-pdf" data-pane="vpn-pane-pdf">
+                            <i class="fas fa-file-pdf"></i> Fiche PDF
+                        </button>
+                    </nav>
+
+                    <div class="vpn-pane" id="vpn-pane-demo" role="tabpanel" aria-labelledby="vpn-btn-demo">
+                        <div class="vpn-terminal">
+                            <div class="vpn-terminal-bar">
+                                <span class="vpn-dot vpn-dot--red"></span>
+                                <span class="vpn-dot vpn-dot--yellow"></span>
+                                <span class="vpn-dot vpn-dot--green"></span>
+                                <span class="vpn-terminal-title">adminvpn@vpn-server: ~</span>
+                            </div>
+                            <div class="vpn-terminal-body" id="vpnDemoOutput" aria-live="polite"></div>
+                            <div class="vpn-terminal-actions">
+                                <button class="vpn-demo-btn" id="vpnDemoPlay">
+                                    <i class="fas fa-play"></i> Lancer la démo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vpn-pane vpn-pane--hidden" id="vpn-pane-pdf" role="tabpanel"
+                        aria-labelledby="vpn-btn-pdf">
+                        <iframe src="./docs/Fiche_Projet_VPN_OpenVPN.pdf" width="100%" height="520"
+                            title="Fiche projet VPN OpenVPN">
+                            <p>Votre navigateur ne supporte pas l'affichage des PDF.
+                                <a href="./docs/Fiche_Projet_VPN_OpenVPN.pdf">Cliquez ici pour télécharger le PDF</a>
+                            </p>
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

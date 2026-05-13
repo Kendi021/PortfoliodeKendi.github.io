@@ -176,35 +176,12 @@ const terminalScreen = document.querySelector(".terminal-screen");
 let typingTimer;
 const commandHistory = [];
 let historyIndex = -1;
-const lazyCommands = new Map();
 
 function addToHistory(cmd) {
     if (cmd && cmd !== 'clear') {
         commandHistory.push(cmd);
         historyIndex = commandHistory.length;
     }
-}
-
-function loadCommandModule(commandName) {
-    if (lazyCommands.has(commandName)) return Promise.resolve();
-    
-    return new Promise((resolve, reject) => {
-        const module = document.createElement('script');
-        module.src = `./commands/${commandName}.js`;
-        module.async = true;
-        
-        module.onload = () => {
-            lazyCommands.set(commandName, true);
-            resolve();
-        };
-        
-        module.onerror = () => {
-            console.warn(`Module de commande '${commandName}' non trouvé`);
-            resolve();
-        };
-        
-        document.head.appendChild(module);
-    });
 }
 
 function focusTerminal() {
@@ -284,130 +261,134 @@ function processCommand(cmd) {
 }
 
 function runCommand(text) {
-    const inputField = hiddenInput;
-    const displayField = visibleInput;
-
     if (typingTimer) clearTimeout(typingTimer);
 
-    inputField.value = "";
-    displayField.textContent = "";
+    hiddenInput.value = "";
+    visibleInput.textContent = "";
 
-    if (window.innerWidth > 820) {
-        inputField.focus();
-    }
+    if (window.innerWidth > 820) hiddenInput.focus();
 
-    // Charger le module de commande lazily
-    const commandName = text.toLowerCase().split(' ')[0];
-    loadCommandModule(commandName).then(() => {
-        let i = 0;
-        const speed = 50;
+    let i = 0;
 
-        function typeWriter() {
-            if (i < text.length) {
-                const char = text.charAt(i);
-                inputField.value += char;
-                displayField.textContent += char;
-                i++;
-                typingTimer = setTimeout(typeWriter, speed);
-            } else {
-                typingTimer = setTimeout(() => {
-                    processCommand(text);
-                    inputField.value = "";
-                    displayField.textContent = "";
-                    terminalScreen.scrollTop = terminalScreen.scrollHeight;
-                }, 300);
-            }
+    function typeWriter() {
+        if (i < text.length) {
+            hiddenInput.value += text.charAt(i);
+            visibleInput.textContent += text.charAt(i);
+            i++;
+            typingTimer = setTimeout(typeWriter, 50);
+        } else {
+            typingTimer = setTimeout(() => {
+                processCommand(text);
+                hiddenInput.value = "";
+                visibleInput.textContent = "";
+                terminalScreen.scrollTop = terminalScreen.scrollHeight;
+            }, 300);
         }
-
-        typeWriter();
-    });
-}
-
-document.addEventListener("click", function (e) {
-    if (e.target.onclick && e.target.onclick.toString().includes("runCommand")) {
-        setTimeout(() => {
-            terminalScreen.scrollTop = terminalScreen.scrollHeight;
-        }, 400);
     }
-}, true);
 
-// Initialisation du lazy loading pour les boutons de commandes
-if (terminalScreen) {
-    const footerButtons = document.querySelectorAll('.footer-btn, .clear-btn');
-    footerButtons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            const onclickAttr = btn.getAttribute('onclick') || '';
-            const match = onclickAttr.match(/runCommand\('([^']+)'\)/);
-            if (match) {
-                const command = match[1].toLowerCase().split(' ')[0];
-                loadCommandModule(command);
-            }
-        });
-    });
+    typeWriter();
 }
 
-if ("IntersectionObserver" in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                const imageSrc = img.dataset.src || img.src;
-                
-                if (!imageSrc) {
-                    observer.unobserve(img);
-                    return;
-                }
+// ================================================
+// TERMINAL DE DÉMO VPN
+// ================================================
 
-                // Création du placeholder avec dégradé de chargement
-                const placeholder = document.createElement('div');
-                placeholder.style.cssText = `
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(135deg, 
-                        rgba(43,119,255,0.1) 0%, 
-                        transparent 50%,
-                        rgba(0,194,255,0.1) 100%);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1;
-                    transition: opacity 0.3s ease;
-                `;
-                
-                // Insertion du placeholder avant l'image
-                const wrapper = img.parentNode;
-                if (wrapper && wrapper.style.position !== 'absolute' && wrapper.style.position !== 'fixed' && wrapper.style.position !== 'relative') {
-                    wrapper.style.position = 'relative';
+// ==========================================
+// VPN Demo Terminal
+// ==========================================
+(function () {
+    const STEPS = [
+        { type: 'cmd', text: 'sudo bash auto-vpn.sh', delay: 600 },
+        { type: 'comment', text: '# angristan/openvpn-install — déploiement auto', delay: 700 },
+        { type: 'blank', text: '', delay: 200 },
+        { type: 'info', text: '[•] Détection de l\'IP publique...', delay: 900 },
+        { type: 'data', text: '    Adresse IP : 203.0.113.42', delay: 300 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Téléchargement de openvpn-install.sh...', delay: 1000 },
+        { type: 'data', text: '    [████████████████████] 100%', delay: 800 },
+        { type: 'ok', text: '[✓] Script téléchargé', delay: 350 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Protocole   : UDP — Port : 1194', delay: 500 },
+        { type: 'info', text: '[•] DNS         : Système', delay: 350 },
+        { type: 'info', text: '[•] Client      : client-admin', delay: 350 },
+        { type: 'info', text: '[•] Chiffrement : AES-256-GCM / TLS 1.3', delay: 350 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Installation des paquets...', delay: 1300 },
+        { type: 'data', text: '    openvpn ...................... ok', delay: 280 },
+        { type: 'data', text: '    easy-rsa ..................... ok', delay: 280 },
+        { type: 'data', text: '    iptables ..................... ok', delay: 280 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Génération de l\'infrastructure PKI...', delay: 1200 },
+        { type: 'ok', text: '[✓] Autorité de certification créée (CA)', delay: 450 },
+        { type: 'ok', text: '[✓] Certificat serveur signé', delay: 400 },
+        { type: 'ok', text: '[✓] Clé Diffie-Hellman générée', delay: 400 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Activation du service systemd...', delay: 700 },
+        { type: 'ok', text: '[✓] openvpn@server.service démarré', delay: 350 },
+        { type: 'blank', text: '', delay: 150 },
+        { type: 'info', text: '[•] Génération du profil client...', delay: 900 },
+        { type: 'ok', text: '[✓] /root/client-admin.ovpn créé', delay: 500 },
+        { type: 'blank', text: '', delay: 200 },
+        { type: 'success', text: '╔══════════════════════════════════════╗', delay: 120 },
+        { type: 'success', text: '║   DÉPLOIEMENT TERMINÉ AVEC SUCCÈS   ║', delay: 80 },
+        { type: 'success', text: '╚══════════════════════════════════════╝', delay: 80 },
+    ];
+
+    let running = false;
+
+    function runVpnDemo() {
+        const output = document.getElementById('vpnDemoOutput');
+        const playBtn = document.getElementById('vpnDemoPlay');
+        if (!output || !playBtn || running) return;
+
+        running = true;
+        output.innerHTML = '';
+        playBtn.disabled = true;
+        playBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> En cours...';
+
+        let cumDelay = 0;
+        STEPS.forEach(function (step, index) {
+            cumDelay += step.delay;
+            setTimeout(function () {
+                const line = document.createElement('span');
+                line.className = 'vpn-line vpn-line--' + step.type;
+                line.textContent = step.text;
+                output.appendChild(line);
+                output.scrollTop = output.scrollHeight;
+
+                if (index === STEPS.length - 1) {
+                    running = false;
+                    playBtn.disabled = false;
+                    playBtn.innerHTML = '<i class="fas fa-redo"></i> Rejouer';
                 }
-                wrapper.insertBefore(placeholder, img);
-                
-                // Chargement progressif de l'image
-                const image = new Image();
-                image.src = imageSrc;
-                image.onload = () => {
-                    img.src = imageSrc;
-                    placeholder.style.opacity = '0';
-                    setTimeout(() => {
-                        if (placeholder.parentNode) {
-                            placeholder.remove();
-                        }
-                    }, 300);
-                    if (img.dataset.src) {
-                        img.removeAttribute("data-src");
-                    }
-                };
-                
-                image.onerror = () => {
-                    placeholder.remove();
-                };
-                
-                observer.unobserve(img);
-            }
+            }, cumDelay);
         });
-    }, { threshold: [0, 0.1] });
+    }
 
-    // Observer toutes les images avec data-src ou dans les cartes
-    document.querySelectorAll("img[data-src], .carte img").forEach((img) => {
-        imageObserver.observe(img);
+    function initVpnTabs() {
+        document.querySelectorAll('.vpn-tab').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                const target = tab.dataset.pane;
+                document.querySelectorAll('.vpn-tab').forEach(function (t) {
+                    t.classList.toggle('vpn-tab--active', t === tab);
+                    t.setAttribute('aria-selected', String(t === tab));
+                });
+                document.querySelectorAll('.vpn-pane').forEach(function (pane) {
+                    pane.classList.toggle('vpn-pane--hidden', pane.id !== target);
+                });
+            });
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('#vpnDemoPlay')) {
+            runVpnDemo();
+        }
     });
-}
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initVpnTabs);
+    } else {
+        initVpnTabs();
+    }
+}());

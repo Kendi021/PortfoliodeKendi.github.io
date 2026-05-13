@@ -1,6 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap');
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css);
+/* ================================================
+   PORTFOLIO KENDI — style.css
+   Feuille de style principale (fusionnée)
+   ================================================ */
 
+/* Polices Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+/* ================================================
+   1. RESET & BASE
+   ================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -30,17 +38,26 @@
     --radius-md: 18px;
     --radius-sm: 12px;
     --max-width: 1240px;
+
+    /* Typographie */
+    --font-primary: "Archivo", "Segoe UI", sans-serif;
+    --font-secondary: "Space Grotesk", "Segoe UI", sans-serif;
+    --font-tertiary: "JetBrains Mono", monospace;
 }
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 32px;
 }
 
 body {
     min-height: 100vh;
     overflow-x: hidden;
     color: var(--text);
-    font-family: 'Archivo', 'Segoe UI', sans-serif;
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     background:
         radial-gradient(circle at top left, rgba(0, 194, 255, 0.14), transparent 35%),
         radial-gradient(circle at top right, rgba(43, 119, 255, 0.16), transparent 32%),
@@ -50,6 +67,16 @@ body {
 body.preloading {
     overflow: hidden;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ================================================
+   2. VARIABLES CSS
+   ================================================ */
 
 .container {
     position: relative;
@@ -118,6 +145,58 @@ body.preloading {
         box-shadow: 0 0 42px rgba(0, 194, 255, 0.5);
     }
 }
+
+/* ================================================
+   3. ANIMATIONS (hero, défilement, images)
+   ================================================ */
+
+@keyframes moveBanner {
+    from {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1.3);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes floatBadge {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* ================================================
+   4. ANIMATIONS AU DÉFILEMENT
+   ================================================ */
 
 [data-animation] {
     opacity: 0;
@@ -375,6 +454,7 @@ header {
     border-left: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(18px);
     transition: right 0.35s ease;
+    contain: layout style paint;
 }
 
 .afficher-menu .barre-laterale {
@@ -487,82 +567,28 @@ header {
     line-height: 1.7;
 }
 
-.terminal-container,
+/* Grille de projets (width/centrage commun) */
 .cartes-projets {
     width: min(100%, var(--max-width));
     margin: 0 auto;
 }
 
-.terminal-container {
-    display: grid;
-    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
-    gap: 1.2rem;
-}
-
+/* ================================================
+   5. TERMINAL INTERACTIF (COMPÉTENCES)
+   ================================================ */
 
 .terminal-window {
-    border: 10px solid var(--border);
-
-}
-
-.terminal-sidebar {
-    background: rgba(10, 18, 32, 0.88);
-    border-radius: var(--radius-md);
-    padding: 1.2rem;
-    color: #dce8f6;
-    height: fit-content;
-}
-
-.terminal-sidebar h3 {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding-bottom: 0.8rem;
-    margin-bottom: 0.85rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    font-family: 'Space Grotesk', sans-serif;
-    color: #ffffff;
-}
-
-.sidebar-hint {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-.command-list {
-    display: grid;
-    gap: 0.55rem;
-}
-
-.command-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.86rem 0.9rem;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid transparent;
-    cursor: pointer;
-    font-family: var(--font-tertiary);
-    font-size: 0.88rem;
-    color: #dce8f6;
-}
-
-.command-list li:hover {
-    transform: translateX(4px);
-    border-color: rgba(0, 194, 255, 0.34);
-    background: rgba(0, 194, 255, 0.08);
-}
-
-.terminal-window {
-    overflow: auto;
-    border-radius: 22px;
+    overflow: hidden;
+    border-radius: 30px;
     background: #0c1220;
     display: flex;
     flex-direction: column;
-    min-height: 600px;
+    height: 550px;
+    max-width: 860px;
+    width: 100%;
+    margin-inline: auto;
+    border: 10px solid var(--border);
+    contain: layout style paint;
 }
 
 .terminal-bar {
@@ -610,15 +636,17 @@ header {
 .terminal-screen {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 1.3rem;
-    background:
-        linear-gradient(180deg, rgba(7, 11, 20, 0.3), rgba(7, 11, 20, 0.3)),
-        #0b1220;
+    background: #0b1220;
     color: #eef6ff;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-family: var(--font-tertiary);
+    font-size: 0.88rem;
+    line-height: 1.6;
     cursor: text;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    contain: layout style paint;
 }
 
 .line {
@@ -989,19 +1017,9 @@ iframe {
     border-radius: 12px;
 }
 
-.loading-spinner {
-    display: none;
-    width: 24px;
-    height: 24px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top-color: var(--accent-2);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+/* ================================================
+   6. HERO : BADGES FLOTTANTS
+   ================================================ */
 
 .hero-visuals {
     position: absolute;
@@ -1025,37 +1043,22 @@ iframe {
     animation: floatBadge 6s ease-in-out infinite;
 }
 
-.floating-badge:nth-child(1) { animation-delay: 0s; }
-.floating-badge:nth-child(2) { animation-delay: -2s; }
-.floating-badge:nth-child(3) { animation-delay: -4s; }
-
-@keyframes floatBadge {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+.floating-badge:nth-child(1) {
+    animation-delay: 0s;
 }
 
-/* Accessibilité: Focus visible pour tous les éléments interactifs */
+.floating-badge:nth-child(2) {
+    animation-delay: -2s;
+}
+
+.floating-badge:nth-child(3) {
+    animation-delay: -4s;
+}
+
+/* Focus accessible pour tous les éléments interactifs */
 *:focus-visible {
     outline: 2px solid var(--accent-2);
-    outline-offset: 2px;
-}
-
-/* Support des préférences d'accessibilité - Mouvement réduit */
-@media (prefers-reduced-motion: reduce) {
-    .floating-badge,
-    [data-animation],
-    .preloader__ring,
-    .loading-spinner {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+    outline-offset: 3px;
 }
 
 .project-meta {
@@ -1237,10 +1240,6 @@ iframe {
 }
 
 @media (max-width: 980px) {
-    .terminal-container {
-        grid-template-columns: 1fr;
-    }
-
     .banniere {
         padding-top: 6rem;
     }
@@ -1362,4 +1361,278 @@ iframe {
 .footer-copy a:hover,
 .footer-copy a:focus-visible {
     text-decoration: underline;
+}
+
+/* ==========================================
+   VPN DEMO TERMINAL
+   ========================================== */
+
+.vpn-demo-panel {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(43, 119, 255, 0.22);
+    background: #0d1117;
+    min-width: 0;
+    align-self: stretch;
+}
+
+.vpn-tabs {
+    display: flex;
+    background: #161b22;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.vpn-tab {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #7d8590;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.77rem;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+}
+
+.vpn-tab:hover {
+    color: #c9d1d9;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.vpn-tab--active {
+    color: #58a6ff;
+    border-bottom-color: #58a6ff;
+    background: rgba(88, 166, 255, 0.07);
+}
+
+.vpn-pane {
+    flex: 1;
+    min-height: 0;
+}
+
+.vpn-pane--hidden {
+    display: none;
+}
+
+.vpn-terminal {
+    display: flex;
+    flex-direction: column;
+    height: 470px;
+}
+
+.vpn-terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 1rem;
+    background: #161b22;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.vpn-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.vpn-dot--red {
+    background: #ff5f57;
+}
+
+.vpn-dot--yellow {
+    background: #ffbd2e;
+}
+
+.vpn-dot--green {
+    background: #28c840;
+}
+
+.vpn-terminal-title {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #7d8590;
+}
+
+.vpn-terminal-body {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #c9d1d9;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.vpn-terminal-body:empty::before {
+    content: 'Cliquez sur "Lancer la démo" pour simuler le déploiement.';
+    color: #484f58;
+    font-style: italic;
+}
+
+.vpn-line {
+    display: block;
+    white-space: pre;
+}
+
+.vpn-line--blank {
+    min-height: 0.6rem;
+    display: block;
+}
+
+.vpn-line--cmd {
+    color: #e6edf3;
+    font-weight: 600;
+}
+
+.vpn-line--cmd::before {
+    content: '$ ';
+    color: #3fb950;
+}
+
+.vpn-line--ok {
+    color: #3fb950;
+}
+
+.vpn-line--info {
+    color: #58a6ff;
+}
+
+.vpn-line--data {
+    color: #8b949e;
+    padding-left: 1rem;
+}
+
+.vpn-line--warn {
+    color: #d29922;
+}
+
+.vpn-line--comment {
+    color: #484f58;
+}
+
+.vpn-line--success {
+    color: #3fb950;
+    font-weight: 700;
+}
+
+.vpn-terminal-actions {
+    padding: 0.7rem 1rem;
+    background: #161b22;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.vpn-demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.95rem;
+    border-radius: 6px;
+    border: 1px solid rgba(63, 185, 80, 0.4);
+    background: rgba(63, 185, 80, 0.08);
+    color: #3fb950;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.vpn-demo-btn:hover:not(:disabled) {
+    background: rgba(63, 185, 80, 0.18);
+    border-color: #3fb950;
+}
+
+.vpn-demo-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+    .vpn-terminal {
+        height: 380px;
+    }
+}
+
+/* ================================================
+   PERFORMANCE & ACCESSIBILITÉ
+   ================================================ */
+
+/* Hints GPU pour les éléments animés (sans écraser les transforms de défilement) */
+.carte,
+.carte-overlay,
+.lien-menu,
+.bouton-personnalise,
+.bouton-secondaire,
+.info-carte .bouton-voir {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Touch devices : supprimer le délai de clic sur mobile */
+button,
+.bouton-personnalise,
+.bouton-secondaire,
+.info-carte .bouton-voir,
+.lien-menu,
+.reseaux-sociaux a,
+.footer-btn,
+.clear-btn {
+    touch-action: manipulation;
+}
+
+/* Scrollbar personnalisée (navigateurs WebKit) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(148, 163, 184, 0.12);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(43, 119, 255, 0.34);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 194, 255, 0.52);
+}
+
+/* Mode impression */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .preloader,
+    .menu-burger,
+    .barre-laterale {
+        display: none !important;
+    }
+
+    .terminal-window,
+    .carte,
+    .contenu-modale {
+        box-shadow: none !important;
+    }
 }
