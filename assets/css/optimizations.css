@@ -1,0 +1,137 @@
+/* =========================================================================
+   OPTIMISATIONS DE PERFORMANCE ET D'ACCESSIBILITE
+   ========================================================================= */
+
+/* GPU hints uniquement sur les zones animees ou lourdes */
+[data-animation="haut"],
+[data-animation="gauche"],
+[data-animation="droite"],
+.carte,
+.carte-overlay,
+.terminal-window,
+.terminal-screen,
+.lien-menu,
+.bouton-personnalise,
+.bouton-secondaire,
+.info-carte .bouton-voir {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.terminal-window,
+.terminal-screen,
+.cartes-projets,
+.barre-laterale {
+    contain: layout style paint;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 32px;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.preloader {
+    background-attachment: fixed;
+}
+
+button,
+.bouton-personnalise,
+.bouton-secondaire,
+.info-carte .bouton-voir,
+.lien-menu,
+.reseaux-sociaux a,
+.footer-btn,
+.clear-btn,
+.command-list li {
+    touch-action: manipulation;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.menu-burger:focus-visible {
+    outline: 2px solid #2b77ff;
+    outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(148, 163, 184, 0.12);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(43, 119, 255, 0.34);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 194, 255, 0.52);
+}
+
+@media (max-width: 1200px) {
+    .terminal-container {
+        grid-template-columns: 1fr;
+    }
+
+    .terminal-sidebar,
+    .terminal-window {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 820px) {
+    .menu-burger span {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .preloader,
+    .menu-burger,
+    .barre-laterale {
+        display: none !important;
+    }
+
+    .terminal-window,
+    .carte,
+    .contenu-modale {
+        box-shadow: none !important;
+    }
+}

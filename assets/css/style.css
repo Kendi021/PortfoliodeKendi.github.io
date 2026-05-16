@@ -943,6 +943,7 @@ header {
     padding: 1rem;
     background: rgba(3, 7, 14, 0.78);
     backdrop-filter: blur(10px);
+    overflow-y: auto;
 }
 
 .contenu-modale {
@@ -1293,9 +1294,37 @@ iframe {
         padding: 1rem;
     }
 
+    .modale {
+        padding: 0.4rem;
+    }
+
     .contenu-modale {
         padding: 0.9rem;
-        margin-top: 2vh;
+        margin: 0.4rem auto;
+        border-radius: 14px;
+    }
+
+    .project-modal-copy h3 {
+        font-size: 1.4rem;
+    }
+
+    .fermer-modale {
+        font-size: 1.7rem;
+        top: 0.6rem;
+        right: 0.8rem;
+    }
+
+    .vpn-terminal {
+        height: 260px;
+    }
+
+    .vpn-terminal-body {
+        font-size: 0.72rem;
+        line-height: 1.7;
+    }
+
+    #vpn-pane-pdf iframe {
+        height: 300px;
     }
 
     .cartes-projets {
